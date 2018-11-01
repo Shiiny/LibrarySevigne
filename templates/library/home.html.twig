@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block app_img %}
+    <img class="cs__front" src="{{ asset('img/front.jpg') }}" alt="Bibliothèque">
+{% endblock %}
+
+
+{% block body %}
+    <div class="heading">
+        <h3>Nouveautés 2018</h3>
+    </div>
+
+    <div class="content row">
+        {% for book in books %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="cs__card">
+                    <div class="cs__card__descriptionWarpper">
+                        <a class="cs__card__item" href="{{ path('book.show', { id: book.id, slug: book.slug }) }}">
+                            <div class="cs__card__body">
+                                <h5 class="cs__card__title">{{ book.title|truncate(50) }}</h5>
+                                <p class="cs__card__subtitle"><em>Auteur : {{ book.authorFirstname }} {{ book.authorLastname }}</em></p>
+                                <p class="cs__card__content">{{ book.content|truncate(320, true, " ...") }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cs__card__description">
+                        <figure class="cs__card__img">
+                            <img src="{{ asset('img/default.jpg') }}" alt="vignette defaut">
+                            <span class="cs__card__categorie">{{ book.category.title }}</span>
+                        </figure>
+                        <div class="cs__card__body">
+                            <h5 class="cs__card__title">{{ book.title|truncate(50) }}</h5>
+                            <p class="cs__card__subtitle"><em>Auteur : {{ book.authorFirstname }} {{ book.authorLastname }}</em></p>
+                        </div>
+                    </div>
+                    <div class="cs__card__action">
+                        <span>Voir le cours</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

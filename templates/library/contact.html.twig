@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block search %}{% endblock %}
+
+{% block body %}
+    {% for label, messages in app.flashes() %}
+        {% for message in messages %}
+            <div class="container">
+                <div id="cs__flash" class="alert alert-{{ label }} mt-3" role="alert">
+                    <p class="cs__message">{{ message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        <div class="heading mt-3">
+            <h1>Nous contacter</h1>
+        </div>
+        <div class="row">
+            <div id="cs__contact" class="col-md-6">
+                <div class="cs__card">
+                    <div class="cs__card__body">
+                        <h3>Nous joindre</h3>
+                        <p>Du lundi au vendredi de 09h à 17h</p>
+                        <ul class="cs__card__list">
+                            <li><i class="fas fa-phone"></i> 01.53.19.07.48</li>
+                            <li><i class="fas fa-location-arrow"></i> 39 rue Henri Barbusse 75005 Paris</li>
+                            <li><a href="mailto:#" class="card-link"><i class="fas fa-at"></i> secretariatsup@collegesevigne.fr</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cs__form" class="col-md-6">
+                <div class="cs__card">
+                    <div class="cs__card__body">
+                        <h3>Formulaire de contact</h3>
+                        {{ form_start(formContact) }}
+                        {{ form_rest(formContact) }}
+                        <button type="submit" class="btn btn-outline-sevigne-blue">Envoyer votre message</button>
+
+                        {{ form_end(formContact) }}
+                    </div>
+                </div>
+            </div>
+            <div id="cs__map" class="col-sm-12">
+                <div class="cs__card">
+                    <div class="cs__card__body">
+                        <div id="map">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRj26WQGVkGlQ7T7OtR0oK8HRUzR1baIg&callback=initMap"></script>
+    <script>
+        // Ajout de la carte sur la page de contact
+        function initMap() {
+            var paris = {lat: 48.84022, lng: 2.338211};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom : 16,
+                center : paris
+            });
+            var marker = new google.maps.Marker({
+                position: paris,
+                map: map
+            });
+        }
+    </script>
+{% endblock %}
+
