@@ -415,10 +415,53 @@ div#nav-tabContent {
 
 /*-------------- Login / Register --------------*/
 .sign {
-    margin-top: 5em;
+    margin: 7em 0;
 }
 .panel {
     border-radius: 5px;
+}
+.panel-login {
+    border: none;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 49px 14px rgba(188, 190, 194, 0.39);
+    box-shadow: 0 0 49px 14px rgba(188, 190, 194, 0.39);
+}
+.panel-login h2 {
+    font-size: 22px;
+    padding: 30px 15px;
+    text-transform: uppercase;
+}
+.panel-login>.panel-heading {
+    color: #848c9d;
+    background-color: #e8e9ec;
+    border-color: #fff;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom: 0;
+    padding: 0 15px;
+}
+.panel-login>.panel-heading .tabs {
+    padding: 0;
+}
+.panel-login>.panel-heading a {
+    text-decoration: none;
+    color: #666;
+    text-align: center;
+    font-weight: 300;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.panel-login>.panel-heading .login {
+    padding: 20px 30px;
+    border-bottom-left-radius: 5px;
+}
+a.active div {
+    background-color: #28586f;
+    color: #fff;
 }
 .content-body {
     margin-top: 1em;
@@ -524,17 +567,13 @@ button.form-link.active {
 }
 .btn-login {
     background-color: #E8E9EC;
-    outline: none;
     color: #28586f;
     font-size: 14px;
-    height: auto;
-    font-weight: normal;
-    padding: 14px 0;
+    padding: 14px;
     text-transform: uppercase;
-    border: none;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    border: #bbb solid .5px;
+    border-radius: .5em;
+    margin-bottom: 1.5em;
 }
 .forgot-password {
     text-decoration: underline;

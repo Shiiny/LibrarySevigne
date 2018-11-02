@@ -31,18 +31,18 @@
                             {% if is_granted('ROLE_USER') %}
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <li class="cs__menu-item">
-                                        <a class="cs__menu-link" href=" path('admin_home') }}">Tableau de bord</a>
+                                        <a class="cs__menu-link" href="{{ path('admin.home') }}">Tableau de bord</a>
                                     </li>
                                 {% endif %}
                                 <li class="cs__menu-item">
                                     <a class="cs__menu-link" href="#profile">Bienvenue {{ app.user.username|upper }}</a>
                                 </li>
                                 <li class="cs__menu-item">
-                                    <a class="cs__menu-link" href=" path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                                    <a class="cs__menu-link" href="{{ path('security.logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
                                 </li>
                             {% else %}
                                 <li class="cs__menu-item">
-                                    <a data-toggle="modal" href=" path('app_login') }}" class="nav-link modal-trigger"><i class="fas fa-sign-in-alt"></i> Connexion / Inscription</a>
+                                    <a href="{{ path('security.login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Connexion / Inscription</a>
                                 </li>
                             {% endif %}
                         </ul>
