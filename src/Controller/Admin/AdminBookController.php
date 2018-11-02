@@ -7,6 +7,7 @@ use App\Form\BookType;
 use App\Form\CategoryType;
 use App\Repository\BookRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,11 +32,17 @@ class AdminBookController extends AbstractController
 
     /**
      * @Route("/admin/book", name="admin.book.index")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        $books = $this->bookRepository->findAll();
+        $books = $paginator->paginate(
+            $this->bookRepository->findAllBooksQuery(),
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('admin/book/index.html.twig', compact('books'));
     }

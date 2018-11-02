@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -21,14 +23,26 @@ class BookRepository extends ServiceEntityRepository
 
     /**
      * @param int $limit
+     * @param string $date
      * @return Book[]
      */
-    public function findByLimit(int $limit) :array
+    public function findByLimitAndDate(int $limit, string $date) :array
     {
         return $this->createQueryBuilder('b')
+                    ->orderBy('b.'. $date, 'DESC' )
                     ->setMaxResults($limit)
                     ->getQuery()
                     ->getResult();
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllBooksQuery(): Query
+    {
+        return $this->createQueryBuilder('b')
+                    ->orderBy('b.title', 'ASC')
+                    ->getQuery();
     }
 
     /*public function findAllOrderBy()

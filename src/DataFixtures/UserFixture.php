@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixture extends Fixture
+class UserFixture extends Fixture implements OrderedFixtureInterface
 {
     /**
      * @var UserPasswordEncoderInterface
@@ -52,5 +52,15 @@ class UserFixture extends Fixture
             $manager->persist($user);
         }
         $manager->flush();
+    }
+
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
+    public function getOrder()
+    {
+        return 3;
     }
 }

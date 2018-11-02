@@ -5,32 +5,38 @@ namespace App\DataFixtures;
 use App\Entity\Book;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Factory;
+use Faker\ORM\Doctrine\Populator;
 
-class BookFixtures extends Fixture implements OrderedFixtureInterface
+class BookFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $book = new Book();
-        $book
-            ->setTitle("Sophocle, Ajax")
-            ->setContent("Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually! No, I'm Santa Claus! I love this planet! I've got wealth, fame, and access to the depths of sleaze that those things bring.
-    I found what I need. And it's not friends, it's things. Tell her you just want to talk. It has nothing to do with mating. You know, I was God once. Oh, how I wish I could believe or understand that! There's only one reasonable course of action now: kill Flexo!
-    Yeah, and if you were the pope they'd be all, \"Straighten your pope hat.\" And \"Put on your good vestments.\" Guards! Bring me the forms I need to fill out to have her taken away! There, now he's trapped in a book I wrote: a crummy world of plot holes and spelling errors!")
-            ->setAuthorFirstname("Sandrine")
-            ->setAuthorLastname("Dubel")
-            ->setCategory($manager->getRepository(Category::class)->findOneByTitle('Littérature Grecque'))
-            ->setYearBook("2016");
-
-        $manager->persist($book);
-
-        $manager->flush();
+        $faker = Factory::create('fr_FR');
+        $populator = new Populator($faker, $manager);
+        $populator->addEntity(Category::class, 20, [
+            'title' => function() use ($faker) {
+                return $faker->words(2, true);
+            }
+        ]);
+        $populator->addEntity(Book::class, 100, [
+            'title' => function() use ($faker) {
+                return $faker->words(3, true);
+            },
+            'content' => function() use ($faker) {
+                return $faker->sentences(3, true);
+            },
+            'authorFirstname' => function() use ($faker) {
+                return $faker->firstName;
+            },
+            'authorLastname' => function() use ($faker) {
+                return $faker->lastName;
+            },
+            'yearBook' => function() use ($faker) {
+                return $faker->numberBetween(1980, 2018);
+            }
+        ]);
+        $populator->execute();
     }
-
-    public function getOrder()
-    {
-        return 2;
-    }
-
 }

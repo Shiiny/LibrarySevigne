@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Form\ContactType;
 use App\Repository\BookRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,11 +24,17 @@ class BookController extends AbstractController
 
     /**
      * @Route("/catalog", name="book.catalog")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function catalog(): Response
+    public function catalog(PaginatorInterface $paginator, Request $request): Response
     {
-        $books = $this->bookRepository->findAll();
+        $books = $paginator->paginate(
+            $this->bookRepository->findAllBooksQuery(),
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('library/catalog.html.twig', [
             'books' => $books
         ]);

@@ -16,7 +16,7 @@ class AdminController extends AbstractController
      */
     public function home(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findByLimit(5);
+        $books = $bookRepository->findByLimitAndDate(6, 'updatedAt');
         return $this->render('admin/home.html.twig', compact('books'));
     }
 

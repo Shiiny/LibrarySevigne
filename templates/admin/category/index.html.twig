@@ -21,6 +21,14 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="count">
+                <p>Total des catégories : {{ categories.getTotalItemCount }}</p>
+            </div>
+            <div class="cs__pagination">
+                <nav aria-label="Pagination">
+                    {{ knp_pagination_render(categories) }}
+                </nav>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     {# include '@Admin/admin/pagination.html.twig' #}
