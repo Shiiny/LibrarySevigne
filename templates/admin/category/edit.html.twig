@@ -2,16 +2,16 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item">
-        <a href="{{ path('admin.book.index') }}">Tous les cours</a>
+        <a href="{{ path('admin.category.index') }}">Toutes les catégories</a>
     </li>
-    <li class="breadcrumb-item active">Éditer un cours</li>
+    <li class="breadcrumb-item active">Éditer une catégorie</li>
 {% endblock %}
 
 {% block content %}
     <div class="card mb-3">
-        <h2 class="card-header">Éditer un Cours</h2>
+        <h2 class="card-header">Éditer une catégorie</h2>
         <div class="card-body">
-            {{ include ('admin/book/_form.html.twig', {form: form, button: 'Enregistrer'}) }}
+            {{ include ('admin/category/_form.html.twig', {form: form, button: 'Enregistrer'}) }}
         </div>
         <div class="card-footer small text-muted">Actualisé le : {{ "now"|localizeddate('long', 'none') }}</div>
     </div>

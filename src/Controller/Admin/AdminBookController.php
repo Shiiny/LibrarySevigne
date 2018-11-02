@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Form\CategoryType;
 use App\Repository\BookRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +30,7 @@ class AdminBookController extends AbstractController
     }
 
     /**
-     * @Route("/admin/cours", name="admin.book.index")
+     * @Route("/admin/book", name="admin.book.index")
      * @return Response
      */
     public function index(): Response
@@ -48,6 +49,7 @@ class AdminBookController extends AbstractController
     {
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
+        $formCategory = $this->createForm(CategoryType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -60,7 +62,8 @@ class AdminBookController extends AbstractController
 
         return $this->render('admin/book/new.html.twig', [
             'book' => $book,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formCategory' => $formCategory->createView()
         ]);
     }
 

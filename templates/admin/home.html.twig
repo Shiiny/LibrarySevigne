@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <div class="card-deck">
                         {# for user in users #}
-                        <div class="card col-lg-6">
+                        <div class="card col-lg-4">
                             <div class="avatar">
                                 <img src="{{ asset('img/user.png') }}" alt="">
                             </div>
@@ -50,7 +50,7 @@
                         {# endfor #}
                     </div>
                 </div>
-                <div class="card-footer small text-muted">Actualisé le :  "now"|localizeddate('long', 'none') }}</div>
+                <div class="card-footer small text-muted">Actualisé le : {{ "now"|localizeddate('long', 'none') }}</div>
             </div>
         </div>
     </div>

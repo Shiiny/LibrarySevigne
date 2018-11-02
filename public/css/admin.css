@@ -529,3 +529,7 @@ footer.sticky-footer {
 .cs__table-action {
   width: 10%;
 }
+.btn-new-category {
+  display: flex;
+  align-items: flex-end;
+}

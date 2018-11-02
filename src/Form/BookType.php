@@ -40,7 +40,7 @@ class BookType extends AbstractType
                 'class'         => 'App\Entity\Category',
                 'placeholder'   => 'Category select'
             ])
-            /*->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $data = $event->getData();
 
                 if (!$data) {
@@ -58,7 +58,7 @@ class BookType extends AbstractType
 
                 $data['category'] = $newCategory->getId();
                 $event->setData($data);
-            })*/;
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver)

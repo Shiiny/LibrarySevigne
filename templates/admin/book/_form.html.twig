@@ -2,11 +2,16 @@
 <div class="row">
     <div class="col-md-5">{{ form_row(form.title) }}</div>
     <div class="col-md-5">{{ form_row(form.category) }}</div>
-    <div class="col-md-2">{{ form_row(form.yearBook) }}</div>
+    {% if app.request.get('_route') != 'admin.book.edit' %}
+        <div class="col-md-2 form-group btn-new-category">
+            <button class="btn btn-outline-secondary" type="button" id="newCategory">Nouvelle catégorie</button>
+        </div>
+    {% endif %}
 </div>
 <div class="row">
     <div class="col-md-5">{{ form_row(form.authorFirstname) }}</div>
     <div class="col-md-5">{{ form_row(form.authorLastname) }}</div>
+    <div class="col-md-2">{{ form_row(form.yearBook) }}</div>
 </div>
 <div class="row">
     <div class="col-md-12">{{ form_row(form.content) }}</div>
