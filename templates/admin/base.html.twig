@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Dashboard - Bibliothèque de Sévigné{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <a class="navbar-brand" href="{{ path('home') }}">Site Bibliothèque Sévigné</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                        <a class="nav-link" href="{{ path('admin.home') }}">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span class="nav-link-text">Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Books">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCours" data-parent="#exampleAccordion">
+                            <i class="fas fa-book"></i>
+                            <span class="nav-link-text">Les cours</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseCours">
+                            <li>
+                                <a href="{{ path('admin.book.index') }}">Tous les cours</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('admin.book.create') }}">Ajouter un cours</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCategories" data-parent="#exampleAccordion">
+                            <i class="fas fa-tags"></i>
+                            <span class="nav-link-text">Les catégories</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseCategories">
+                            <li>
+                                <a href=" path('admin_list', {'param': 'category'}) }}">Toutes les catégories</a>
+                            </li>
+                            <li>
+                                <a href=" path('admin_new', {'param': 'category'}) }}">Ajouter une catégorie</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Professeurs">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseProfs" data-parent="#exampleAccordion">
+                            <i class="fas fa-tags"></i>
+                            <span class="nav-link-text">Les Auteur/Professeurs</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseProfs">
+                            <li>
+                                <a href="">Liste des Professeurs</a>
+                            </li>
+                            <li>
+                                <a href="">Ajouter un professeur</a>
+                            </li>
+                        </ul>
+
+                    </li>-->
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User">
+                            <a class="nav-link" href="#adminuser">
+                                <i class="fas fa-user"></i>
+                                <span class="nav-link-text">Utilisateur</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+
+            <div class="container-fluid">
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('admin.home') }}">Tableau de bord</a>
+                    </li>
+                    {% block breadcrumb %}<li class="breadcrumb-item active">Accueil</li>{% endblock %}
+                </ol>
+
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            <footer class="sticky-footer">
+                <div class="container">
+                    <div class="text-center">
+                        <small>Copyright © ShinyWeb 2018</small>
+                    </div>
+                </div>
+            </footer>
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à terminer votre session en cours.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                            <a class="btn btn-primary" href="#logout">Déconnexion</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>

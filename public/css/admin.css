@@ -489,12 +489,28 @@ footer.sticky-footer {
 .card-img-top img {
   width: 100%;
 }
-.card.book {
-  border-color: #28586f;
+.cs__card__admin {
+  position: relative;
+  display: flex;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  margin-bottom: 1rem;
 }
-.card.book .card-header {
-  background-color: #28586f;
-  color: #fff;
+.cs__text {
+  color: #bfae94;
+}
+.pull-right {
+  float: right;
+}
+.cs__small {
+  color: #6c757d;
+  text-align: right;
+  font-size: 70%;
+  font-weight: 400;
+  margin-bottom: 0;
 }
 .avatar {
   width: 100%;
@@ -505,4 +521,11 @@ footer.sticky-footer {
   vertical-align: middle;
   width: 100%;
   border-style: none;
+}
+.cs__btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+.cs__table-action {
+  width: 10%;
 }

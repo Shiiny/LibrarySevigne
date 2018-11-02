@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <!-- Card Book -->
+        <div class="col-lg-6">
+            <div class="card mb-3" id="last-books">
+                <h4 class="card-header"><i class="fa fa-table"></i> Derniers cours ajoutés</h4>
+                <div class="card-body">
+                    {% for book in books %}
+                        <div class="cs__card__admin">
+                            <div class="card-body">
+                                <div class="cs__text">
+                                    <strong>{{ book.category.title }}</strong>
+                                    <strong class="pull-right">{{ book.yearBook }}</strong>
+                                </div>
+                                <h3 class="mb-0">
+                                    <a class="text-dark" href="{{ path('admin.book.edit', {id: book.id}) }}">{{ book.title }}</a>
+                                </h3>
+                                <div class="mb-3 text-muted">Auteur : {{ book.authorLastname }} {{ book.authorFirstname }}</div>
+                                <p class="cs__small">Dernière mise à jour :  {{ book.updatedAt|time_diff }}</p>
+                            </div>
+                            <img class="card-img-right flex-auto d-none d-lg-block" src="http://placehold.it/150x150" alt="Card image cap">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="card-footer small text-muted">Actualisé le :  {{ "now"|localizeddate('long', 'none') }}</div>
+            </div>
+        </div>
+        <!-- fin Card Book -->
+
+        <div class="col-lg-6">
+            <div class="card mb-3" id="last-users">
+                <h4 class="card-header"><i class="fa fa-table"></i> Membres récents</h4>
+                <div class="card-body">
+                    <div class="card-deck">
+                        {# for user in users #}
+                        <div class="card col-lg-6">
+                            <div class="avatar">
+                                <img src="{{ asset('img/user.png') }}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="title">
+                                    <a href="#userindex"> user.username }}</a>
+                                </div>
+                                <p> user.email }}</p>
+                                <p class="small text-muted">Inscrit le :  user.dateRegister|localizeddate('medium') }}</p>
+                            </div>
+                        </div>
+                        {# endfor #}
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">Actualisé le :  "now"|localizeddate('long', 'none') }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

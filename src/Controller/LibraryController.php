@@ -18,7 +18,7 @@ class LibraryController extends AbstractController
      */
     public function index(BookRepository $repository) :Response
     {
-        $books = $repository->findLatest();
+        $books = $repository->findByLimit(12);
 
         return $this->render('library/home.html.twig', compact('books'));
     }

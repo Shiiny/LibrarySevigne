@@ -20,12 +20,13 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $limit
      * @return Book[]
      */
-    public function findLatest() :array
+    public function findByLimit(int $limit) :array
     {
         return $this->createQueryBuilder('b')
-                    ->setMaxResults(12)
+                    ->setMaxResults($limit)
                     ->getQuery()
                     ->getResult();
     }

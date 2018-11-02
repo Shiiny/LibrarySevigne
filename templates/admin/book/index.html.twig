@@ -1,0 +1,60 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block breadcrumb %}<li class="breadcrumb-item active">Tous les cours</li>{% endblock %}
+
+{% block content %}
+    {% for label, messages in app.flashes() %}
+        {% for message in messages %}
+            <div id="flash" class="alert alert-{{ label }}" role="alert">
+                <p class="message">{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <span><i class="fa fa-table"></i> Gérer les cours</span>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <a href="{{ path('admin.book.create') }}" class="btn btn-sm btn-outline-secondary">Ajouter</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    {# include '@Admin/admin/pagination.html.twig' #}
+                    <thead>
+                    <tr>
+                        <th>Titre du cours</th>
+                        <th>Auteur</th>
+                        <th>Année</th>
+                        <th class="cs__table-action">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {%  for book in books %}
+                        <tr>
+                            <td><a href="{{ path('admin.book.edit', {id: book.id}) }}">{{ book.title }}</a></td>
+                            <td>{{ book.authorLastname }} {{ book.authorFirstname }}</td>
+                            <td>{{ book.yearBook }}</td>
+                            <td>
+                                <div class="cs__btn-group">
+                                    <a href="{{ path('admin.book.edit', {id: book.id}) }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i> Éditer</a>
+                                    <form action="{{ path('admin.book.delete', {id: book.id}) }}" method="post">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}" />
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {%  endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer small text-muted">Actualisé le : {{ "now"|localizeddate('long', 'none') }}</div>
+    </div>
+
+{% endblock %}

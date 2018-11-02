@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
+ * @UniqueEntity("title")
  */
 class Book
 {
@@ -19,6 +22,8 @@ class Book
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ne peut être vide")
+     * @Assert\Length(min = 5, minMessage="Le titre doit faire minimum {{ limit }} caractères")
      */
     private $title;
 
@@ -29,6 +34,8 @@ class Book
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Length(max = 4, maxMessage="4 chiffres maximum")
+     * @Assert\Range(min = 1970, minMessage="Année minimal 1970")
      */
     private $yearBook;
 
@@ -40,16 +47,19 @@ class Book
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="books", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Ne peut être vide")
      */
     private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ne peut être vide")
      */
     private $authorFirstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ne peut être vide")
      */
     private $authorLastname;
 
@@ -135,7 +145,7 @@ class Book
 
     public function setAuthorFirstname(string $authorFirstname): self
     {
-        $this->authorFirstname = $authorFirstname;
+        $this->authorFirstname = ucfirst($authorFirstname);
 
         return $this;
     }
@@ -147,7 +157,7 @@ class Book
 
     public function setAuthorLastname(string $authorLastname): self
     {
-        $this->authorLastname = $authorLastname;
+        $this->authorLastname = ucfirst($authorLastname);
 
         return $this;
     }

@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-5">{{ form_row(form.title) }}</div>
+    <div class="col-md-5">{{ form_row(form.category) }}</div>
+    <div class="col-md-2">{{ form_row(form.yearBook) }}</div>
+</div>
+<div class="row">
+    <div class="col-md-5">{{ form_row(form.authorFirstname) }}</div>
+    <div class="col-md-5">{{ form_row(form.authorLastname) }}</div>
+</div>
+<div class="row">
+    <div class="col-md-12">{{ form_row(form.content) }}</div>
+</div>
+<button class="btn btn-outline-info pull-right">{{ button|default('Créer') }}</button>
+{{ form_end(form) }}
