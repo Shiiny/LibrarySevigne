@@ -50,7 +50,7 @@ class LibraryController extends AbstractController
      * @Route("/legal", name="legal")
      * @return Response
      */
-    public function legal() :Response
+    public function legal(): Response
     {
         return $this->render('library/legale.html.twig');
     }

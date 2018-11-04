@@ -823,3 +823,26 @@ li.search-active {
     background-color: #e6ded1;
     padding: .5em;
 }
+
+
+
+li.cs__item__hidden {
+   display: none;
+}
+.cs__control {
+    text-align: center;
+    padding: 4px 0;
+    line-height: 30px;
+}
+button.cs__voir {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #8d8d8d;
+}
+button.cs__voir:hover {
+    color: #558da4;
+    font-weight: 400;
+    transform: scale(1.1);
+}

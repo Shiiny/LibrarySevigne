@@ -6,6 +6,7 @@ use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -16,7 +17,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class BookRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(RegistryInterface $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Book::class);
     }

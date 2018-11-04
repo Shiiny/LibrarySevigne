@@ -135,3 +135,53 @@ $(document).ready(function () {
         })
     })
 })
+
+$(document).ready(function () {
+    let item = document.querySelectorAll('.cs__item')
+    let catePlus = document.querySelector('.category_plus')
+    let cateMoins = document.querySelector('.category_moins')
+
+    catePlus.addEventListener('click', function () {
+        for (let i = 0; i < item.length; i++) {
+            if (item[i].classList.contains('cs__item__hidden')) {
+                item[i].classList.replace('cs__item__hidden', 'cs__item__temp')
+            }
+        }
+        catePlus.style.display = 'none'
+        cateMoins.style.display= 'inline-block'
+
+    })
+    cateMoins.addEventListener('click', function () {
+        for (let i = 0; i < item.length; i++) {
+            if (item[i].classList.contains('cs__item__temp')) {
+                item[i].classList.replace('cs__item__temp', 'cs__item__hidden')
+            }
+        }
+        cateMoins.style.display = 'none'
+        catePlus.style.display = 'inline-block'
+    })
+
+    let authorPlus = document.querySelector('.author_plus')
+    let authorMoins = document.querySelector('.author_moins')
+
+    authorPlus.addEventListener('click', function () {
+        for (let i = 0; i < item.length; i++) {
+            if (item[i].classList.contains('cs__item__hidden')) {
+                item[i].classList.replace('cs__item__hidden', 'cs__item__temp')
+            }
+        }
+        authorPlus.style.display = 'none'
+        authorMoins.style.display= 'inline-block'
+
+    })
+    authorMoins.addEventListener('click', function () {
+        for (let i = 0; i < item.length; i++) {
+            if (item[i].classList.contains('cs__item__temp')) {
+                item[i].classList.replace('cs__item__temp', 'cs__item__hidden')
+            }
+        }
+        authorMoins.style.display = 'none'
+        authorPlus.style.display = 'inline-block'
+    })
+
+})

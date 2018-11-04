@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Filters\Filter;
 use App\Repository\BookRepository;
+use App\Repository\CategoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,15 +30,22 @@ class BookController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function catalog(PaginatorInterface $paginator, Request $request): Response
+    public function catalog(PaginatorInterface $paginator, Request $request, Filter $filter): Response
     {
         $books = $paginator->paginate(
             $this->bookRepository->findAllBooksQuery(),
             $request->query->getInt('page', 1),
             10
         );
+        $filters = $filter->filterAuthorAndCategoryForSidebar();
+        //$categories = $categoryRepository->findAll();
+
+        dump($filters);
+        //die();
         return $this->render('library/catalog.html.twig', [
-            'books' => $books
+            'books' => $books,
+            'filters' => $filters,
+          //  'categories' => $categories
         ]);
     }
     /**

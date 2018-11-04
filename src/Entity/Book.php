@@ -161,4 +161,9 @@ class Book
 
         return $this;
     }
+
+    public function getAuthor(): string
+    {
+        return $author = $this->getAuthorLastname() . ' ' . $this->getAuthorFirstname();
+    }
 }

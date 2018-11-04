@@ -21,13 +21,17 @@
                         <div id="collapse01" class="collapse show" aria-hidden="false" tabindex="0">
                             <ul class="cs__sidebar__accordion__list">
                                 {# block sidebar_categories #}
-                                    {# for category in sidebar.categories #}
-                                        <li {# if category == app.request.get('category') #} class="search-active" {# endif #}>
-                                            <a href=" path('catalog', {category: category }) }}" title=""> category }}</a>
+                                    {%  for key, category in filters.categories %}
+                                        <li class="cs__item {% if key > 4 %}cs__item__hidden {% endif %}search-active">
+                                            <a href=" path('catalog', {category: category }) }}" title="">{{ category }}</a>
                                         </li>
-                                    {# endfor #}
+                                    {% endfor %}
                                 {# endblock #}
                             </ul>
+                            <div class="cs__control">
+                                <button class="cs__voir category_plus">Voir plus <span>({{ filters.categories|length - 5 }})</span> +</button>
+                                <button class="cs__voir category_moins" style="display: none">Voir moins -</button>
+                            </div>
                         </div>
                     </div>
                     <!-- item Auteur -->
@@ -42,13 +46,17 @@
                         <div id="collapse02" class="collapse show" aria-hidden="false">
                             <ul class="cs__sidebar__accordion__list">
                                 {# block sidebar_profs #}
-                                    {# for author in sidebar.authors #}
-                                        <li {# if author == app.request.get('author') #} class="search-active" {# endif #}>
-                                            <a href=" path('catalog', {author: author }) }}" title=""> author }}</a>
+                                    {%  for key, author in filters.authors %}
+                                        <li class="cs__item {% if key > 4 %}cs__item__hidden {% endif %}search-active">
+                                            <a href=" path('catalog', {author: author }) }}" title="">{{ author }}</a>
                                         </li>
-                                    {# endfor #}
+                                    {%  endfor %}
                                 {# endblock #}
                             </ul>
+                            <div class="cs__control">
+                                <button class="cs__voir author_plus">Voir plus <span>({{ filters.authors|length - 5 }})</span> +</button>
+                                <button class="cs__voir author_moins" style="display: none">Voir moins -</button>
+                            </div>
                         </div>
                     </div>
                 </div>
