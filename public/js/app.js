@@ -72,11 +72,12 @@ $(document).ready(function() {
     for( let i = 0; i < chevrons.length; i++) {
         chevrons[i].addEventListener('click', function () {
             let child = [].slice.call(chevrons[i].children)
-            if (child[0].style.transform === 'rotate(180deg)') {
-                child[0].style.transform = 'rotate(0deg)'
+
+            if (child[0].style.transform === '') {
+                child[0].style.transform = 'rotate(180deg)'
             }
             else {
-                child[0].style.transform = 'rotate(180deg)'
+                child[0].removeAttribute("style")
             }
         })
     }
@@ -136,52 +137,38 @@ $(document).ready(function () {
     })
 })
 
+// Bouton "voir plus" dans la sidebar
 $(document).ready(function () {
-    let item = document.querySelectorAll('.cs__item')
-    let catePlus = document.querySelector('.category_plus')
-    let cateMoins = document.querySelector('.category_moins')
-
-    catePlus.addEventListener('click', function () {
-        for (let i = 0; i < item.length; i++) {
-            if (item[i].classList.contains('cs__item__hidden')) {
-                item[i].classList.replace('cs__item__hidden', 'cs__item__temp')
+    function seeMore (selector) {
+        let btnSee = selector.querySelector('.see-more')
+        let btnMoins = selector.querySelector('.see-less')
+        btnSee.addEventListener('click', function (e) {
+            e.preventDefault()
+            let ulElt = selector.querySelector('.cs__sidebar__accordion__list')
+            if (ulElt.hasChildNodes()) {
+                let child = ulElt.children
+                for (let i = 0; i < child.length; i++) {
+                    if (child[i].classList.contains('cs__item__hidden')) {
+                        child[i].classList.replace('cs__item__hidden', 'cs__item__temp')
+                    }
+                }
             }
-        }
-        catePlus.style.display = 'none'
-        cateMoins.style.display= 'inline-block'
+            btnSee.style.display = 'none'
+            btnMoins.style.display = 'inline-block'
+            btnMoins.addEventListener('click', function (e) {
+                e.preventDefault()
+                let child = ulElt.children
+                for (let i = 0; i < child.length; i++) {
+                    if (child[i].classList.contains('cs__item__temp')) {
+                        child[i].classList.replace('cs__item__temp', 'cs__item__hidden')
+                    }
+                }
+                btnMoins.style.display = 'none'
+                btnSee.style.display = 'inline-block'
+            })
+        })
+    }
 
-    })
-    cateMoins.addEventListener('click', function () {
-        for (let i = 0; i < item.length; i++) {
-            if (item[i].classList.contains('cs__item__temp')) {
-                item[i].classList.replace('cs__item__temp', 'cs__item__hidden')
-            }
-        }
-        cateMoins.style.display = 'none'
-        catePlus.style.display = 'inline-block'
-    })
-
-    let authorPlus = document.querySelector('.author_plus')
-    let authorMoins = document.querySelector('.author_moins')
-
-    authorPlus.addEventListener('click', function () {
-        for (let i = 0; i < item.length; i++) {
-            if (item[i].classList.contains('cs__item__hidden')) {
-                item[i].classList.replace('cs__item__hidden', 'cs__item__temp')
-            }
-        }
-        authorPlus.style.display = 'none'
-        authorMoins.style.display= 'inline-block'
-
-    })
-    authorMoins.addEventListener('click', function () {
-        for (let i = 0; i < item.length; i++) {
-            if (item[i].classList.contains('cs__item__temp')) {
-                item[i].classList.replace('cs__item__temp', 'cs__item__hidden')
-            }
-        }
-        authorMoins.style.display = 'none'
-        authorPlus.style.display = 'inline-block'
-    })
-
+    seeMore(document.querySelector('#js_categorie'))
+    seeMore(document.querySelector('#js_authors'))
 })

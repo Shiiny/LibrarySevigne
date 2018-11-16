@@ -7,81 +7,82 @@
         <meta name="author" content="Web-Shiny">
         <title>{% block title %}Bibliothèque de Sévigné{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+        <!--<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+        <link rel="stylesheet" href=" asset('css/style.css') }}">
+        <link rel="stylesheet" href=" asset('css/carousel.css') }}">-->
+        <link rel="stylesheet" href="{{ asset('css/app.css')}}">
         {% block stylesheets %}
         {% endblock %}
     </head>
     <body>
-        <header class="cs__header__topBar">
-            <nav class="cs__main__nav">
-                <div class="container">
-                    <a class="cs__main__menu__logo" href="{{ path('home') }}">
-                        <img id="logo" src="{{ asset('/img/Logo.png') }}" alt="Logo Collège Sévigné">
-                    </a>
-                    <button class="cs__main__menu__burger" type="button" data-toggle="collapse" data-target="#cs__mainMenu" aria-controls="cs__mainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="cs__main__menu__burger-icon"></span>
-                    </button>
+        <header class="cs__header">
+            <a class="cs__header__logo" href="{{ path('home') }}">
+                <img id="logo" src="{{ asset('/img/Logo.png') }}" alt="Logo Collège Sévigné">
+            </a>
 
-                    <div class="cs__main__menu collapse" id="cs__mainMenu">
-                        <ul class="cs__menu container">
-                            {% if is_granted('ROLE_USER') %}
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <li class="cs__menu-item">
-                                        <a class="cs__menu-link" href="{{ path('admin.home') }}">Tableau de bord</a>
-                                    </li>
-                                {% endif %}
-                                <li class="cs__menu-item">
-                                    <a class="cs__menu-link" href="#profile">Bienvenue {{ app.user.username|upper }}</a>
-                                </li>
-                                <li class="cs__menu-item">
-                                    <a class="cs__menu-link" href="{{ path('security.logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
-                                </li>
-                            {% else %}
-                                <li class="cs__menu-item">
-                                    <a href="{{ path('security.login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Connexion / Inscription</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
+            <button class="cs__header__burger" type="button" aria-label="Navigation">
+                <span class="cs__header__burger-icon"></span>
+            </button>
+
+            <nav class="cs__header__nav">
+                <ul class="cs__menu">
+                    {# if is_granted('ROLE_USER') #}
+                        {# if is_granted('ROLE_ADMIN') #}
+                            <li class="cs__menu-item">
+                                <a class="cs__menu-link" href="{{ path('admin.home') }}">Tableau de bord</a>
+                            </li>
+                        {# endif #}
+                        <li class="cs__menu-item">
+                            <a class="cs__menu-link icon-profil" href="#profile">Bienvenue  app.user.username|upper }}</a>
+                        </li>
+                        <li class="cs__menu-item">
+                            <a class="cs__menu-link icon-logout" href="{{ path('security.logout') }}">Déconnexion</a>
+                        </li>
+                    {# else #}
+                        <li class="cs__menu-item">
+                            <a class="cs__menu-link icon-login" href="{{ path('security.login') }}">Connexion / Inscription</a>
+                        </li>
+                    {# endif #}
+                </ul>
             </nav>
-        </header>
 
-        {% block search %}
-            <div class="cs__container__search">
-                <div class="cs__content__search">
-                    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
-                        <div class="cs__content__search-title">
-                            <div class="cs__search__picto col-md-3 col-sm-4">
-                                <img class="cs__picto" src="{{ asset('img/picto_CS.png') }}" alt="picto Collège Sévigné">
-                            </div>
-                            <div class="col-sm-9">
-                                <h1 class="cs__title_site">Bibliothèque Numérique</h1>
-                            </div>
-                        </div>
-                        <form action=" path('search') }}" method="GET">
-                            <div class="input-group">
-                                <input type="text" name="param" class="form-control" aria-label="Rechercher" aria-describedby="basic-addon" placeholder="Rechercher...">
-                                <div class="input-group-append">
-                                    <button type="submit" class="input-group-text" id="basic-addon">
-                                        <i class="fas fa-search"></i>
-                                    </button>
+            {% block search %}
+                <div class="cs__baseline">
+                    <div class="cs__content__search">
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
+                            <div class="cs__content__search-title">
+                                <div class="cs__search__picto col-md-3 col-sm-4">
+                                    <img class="cs__picto" src="{{ asset('img/picto_CS.png') }}" alt="picto Collège Sévigné">
+                                </div>
+                                <div class="col-sm-9">
+                                    <h1 class="cs__title_site">Bibliothèque Numérique</h1>
                                 </div>
                             </div>
-                        </form>
+                            <form action=" path('search') }}" method="GET">
+                                <div class="input-group">
+                                    <input type="text" name="param" class="form-control" aria-label="Rechercher" aria-describedby="basic-addon" placeholder="Rechercher...">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="input-group-text" id="basic-addon">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+
+                    {% block app_img %}
+                        <img class="cs__front-blue" src="{{ asset('img/front_blue.jpg') }}" alt="accueil">
+                    {% endblock %}
                 </div>
+            {% endblock %}
 
-                {% block app_img %}
-                    <img class="cs__front-blue" src="{{ asset('img/front_blue.jpg') }}" alt="accueil">
-                {% endblock %}
-            </div>
+        </header>
 
-            <div class="cs__header__midBar">
+
+            <!--<div class="cs__header__midBar">
                 <nav class="cs__main__nav">
                     <div class="container">
                         <ul class="cs__menu container">
@@ -98,14 +99,14 @@
                     </div>
                 </nav>
             </div>
-        {% endblock %}
 
         <div class="container">
             {% block body %}
             {% endblock %}
         </div>
+        -->
 
-        <footer class="cs__footer">
+        <!--<footer class="cs__footer">
             <div class="container">
                 <div class="cs__footer__content">
                     <div class="cs__footer__info col-md-7">
@@ -137,12 +138,13 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="{{ asset('/js/app.js') }}"></script>
         {% block javascripts %}
-        {% endblock %}
+        {% endblock %}-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="{{ asset('/js/appjs.js') }}"></script>
     </body>
 </html>
 

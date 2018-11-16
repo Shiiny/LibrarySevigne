@@ -1,0 +1,81 @@
+/**--------- Style Général ---------**/
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+html {
+    font-size: 16px
+}
+body {
+    background: url("../img/back.png");
+    font-size: 1rem;
+    font-family: "Lato", Arial, sans-serif;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, .8);
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/**--------- Header ---------**/
+.cs__header {
+    background: #e9e9e9;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.cs__header__logo {
+    display: block;
+}
+.cs__header__burger {
+    background: transparent;
+    border: 1px solid rgb(40, 88, 111);
+    border-radius: .25em;
+    padding: .25em .5em
+}
+.cs__header__burger-icon {
+    background: url('../img/burger.svg') no-repeat center center/cover;
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+}
+.cs__header__nav {
+    display: none;
+}
+.cs__header__burger.open ~ .cs__header__nav {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.cs__menu {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+.cs__menu-link {
+    color: #28586f;
+}
+.cs__menu-link::before {
+    content: '';
+    display: inline-block;
+    vertical-align: text-bottom;
+    height: 16px;
+    width: 2rem; 
+}
+.icon-login::before {
+    background: url('../img/sign-in.svg') top center no-repeat;
+}
+.icon-logout::before {
+    background: url('../img/sign-out.svg') top center no-repeat;
+}
+.icon-profil::before {
+    background: url('../img/id-card-solid.svg') top center no-repeat;
+}

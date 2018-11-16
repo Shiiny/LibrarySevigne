@@ -846,3 +846,13 @@ button.cs__voir:hover {
     font-weight: 400;
     transform: scale(1.1);
 }
+.cs__search__field {
+    display: flex;
+    align-items: center;
+    margin: 13px 0;
+    position: relative;
+}
+.cs__search-icon {
+    position: absolute;
+    right: 15px;
+}

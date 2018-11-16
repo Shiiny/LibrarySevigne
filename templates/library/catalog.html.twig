@@ -10,7 +10,7 @@
                 </div>
                 <div class="cs__sidebar__content">
                     <!-- item Catégorie -->
-                    <div id="categorie" class="cs__sidebar__accordion__rubrique">
+                    <div id="js_categorie" class="cs__sidebar__accordion__rubrique js-sidebar">
                         <a href="#collapse01" data-toggle="collapse" data-parent="cs__sidebar__accordion" title="Catégories" class="accordion-toggle" aria-selected="true" aria-expanded="true" aria-controls="collapse01">
                             <div class="cs__sidebar__accordion__content">
                                 <div class="cs__sidebar__accordion__heading">
@@ -19,23 +19,29 @@
                             </div>
                         </a>
                         <div id="collapse01" class="collapse show" aria-hidden="false" tabindex="0">
-                            <ul class="cs__sidebar__accordion__list">
+                            <div class="cs__search__field">
+                                <span class="cs__search-icon"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control cs__search-term" placeholder="Filtrer">
+                            </div>
+                            <ul id="categories" class="cs__sidebar__accordion__list">
                                 {# block sidebar_categories #}
                                     {%  for key, category in filters.categories %}
-                                        <li class="cs__item {% if key > 4 %}cs__item__hidden {% endif %}search-active">
-                                            <a href=" path('catalog', {category: category }) }}" title="">{{ category }}</a>
+                                        <li class="cs__item {% if key > 4 %}cs__item__hidden {% endif %}">
+                                            <a href=" path('catalog', {category: category }) }}" title="">{{ category }} <strong class="cs__badge pull-right">1</strong></a>
                                         </li>
                                     {% endfor %}
                                 {# endblock #}
                             </ul>
-                            <div class="cs__control">
-                                <button class="cs__voir category_plus">Voir plus <span>({{ filters.categories|length - 5 }})</span> +</button>
-                                <button class="cs__voir category_moins" style="display: none">Voir moins -</button>
-                            </div>
+                            {% if filters.categories > 4 %}
+                                <div class="cs__control">
+                                    <button class="cs__voir see-more">Voir plus <span>({{ filters.categories|length - 5 }})</span> +</button>
+                                    <button class="cs__voir see-less" style="display: none">Voir moins -</button>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <!-- item Auteur -->
-                    <div id="profs" class="cs__sidebar__accordion__rubrique">
+                    <div id="js_authors" class="cs__sidebar__accordion__rubrique js-sidebar">
                         <a href="#collapse02" data-toggle="collapse" data-parent="cs__sidebar__accordion" title="Auteurs" class="accordion-toggle" aria-selected="true" aria-expanded="true" aria-controls="collapse02">
                             <div class="cs__sidebar__accordion__content">
                                 <div class="cs__sidebar__accordion__heading">
@@ -44,7 +50,7 @@
                             </div>
                         </a>
                         <div id="collapse02" class="collapse show" aria-hidden="false">
-                            <ul class="cs__sidebar__accordion__list">
+                            <ul id="authors" class="cs__sidebar__accordion__list">
                                 {# block sidebar_profs #}
                                     {%  for key, author in filters.authors %}
                                         <li class="cs__item {% if key > 4 %}cs__item__hidden {% endif %}search-active">
@@ -53,10 +59,12 @@
                                     {%  endfor %}
                                 {# endblock #}
                             </ul>
+                            {% if filters.authors > 4 %}
                             <div class="cs__control">
-                                <button class="cs__voir author_plus">Voir plus <span>({{ filters.authors|length - 5 }})</span> +</button>
-                                <button class="cs__voir author_moins" style="display: none">Voir moins -</button>
+                                <button class="cs__voir see-more">Voir plus <span>({{ filters.authors|length - 5 }}) +</span></button>
+                                <button class="cs__voir see-less" style="display: none">Voir moins -</button>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
