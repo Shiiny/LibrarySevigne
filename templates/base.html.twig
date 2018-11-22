@@ -8,6 +8,7 @@
         <title>{% block title %}Bibliothèque de Sévigné{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}" />
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <!--<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href=" asset('css/style.css') }}">
@@ -18,64 +19,57 @@
     </head>
     <body>
         <header class="cs__header">
-            <a class="cs__header__logo" href="{{ path('home') }}">
-                <img id="logo" src="{{ asset('/img/Logo.png') }}" alt="Logo Collège Sévigné">
-            </a>
-
-            <button class="cs__header__burger" type="button" aria-label="Navigation">
-                <span class="cs__header__burger-icon"></span>
-            </button>
-
-            <nav class="cs__header__nav">
-                <ul class="cs__menu">
-                    {# if is_granted('ROLE_USER') #}
-                        {# if is_granted('ROLE_ADMIN') #}
+            <div class="cs__header__topbar">
+                <a class="cs__header__logo" href="{{ path('home') }}">
+                    <img id="logo" src="{{ asset('/img/Logo.png') }}" alt="Logo Collège Sévigné">
+                </a>
+    
+                <button class="cs__header__burger" type="button" aria-label="Navigation">
+                    <span class="cs__header__burger-icon"></span>
+                </button>
+    
+                <nav class="cs__header__nav">
+                    <ul class="cs__menu">
+                        {# if is_granted('ROLE_USER') #}
+                            {# if is_granted('ROLE_ADMIN') #}
+                                <li class="cs__menu-item">
+                                    <a class="cs__menu-link" href="{{ path('admin.home') }}"><i class="fas fa-tachometer-alt"></i>Tableau de bord</a>
+                                </li>
+                            {# endif #}
                             <li class="cs__menu-item">
-                                <a class="cs__menu-link" href="{{ path('admin.home') }}">Tableau de bord</a>
+                                <a class="cs__menu-link" href="#profile"><i class="fas fa-id-card"></i>Bienvenue  app.user.username|upper }}</a>
+                            </li>
+                            <li class="cs__menu-item">
+                                <a class="cs__menu-link" href="{{ path('security.logout') }}"><i class="fas fa-sign-out-alt"></i>Déconnexion</a>
+                            </li>
+                        {# else #}
+                            <li class="cs__menu-item">
+                                <a class="cs__menu-link" href="{{ path('security.login') }}"><i class="fas fa-sign-in-alt"></i>Connexion / Inscription</a>
                             </li>
                         {# endif #}
-                        <li class="cs__menu-item">
-                            <a class="cs__menu-link icon-profil" href="#profile">Bienvenue  app.user.username|upper }}</a>
-                        </li>
-                        <li class="cs__menu-item">
-                            <a class="cs__menu-link icon-logout" href="{{ path('security.logout') }}">Déconnexion</a>
-                        </li>
-                    {# else #}
-                        <li class="cs__menu-item">
-                            <a class="cs__menu-link icon-login" href="{{ path('security.login') }}">Connexion / Inscription</a>
-                        </li>
-                    {# endif #}
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            </div>
 
             {% block search %}
-                <div class="cs__baseline">
-                    <div class="cs__content__search">
-                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
-                            <div class="cs__content__search-title">
-                                <div class="cs__search__picto col-md-3 col-sm-4">
-                                    <img class="cs__picto" src="{{ asset('img/picto_CS.png') }}" alt="picto Collège Sévigné">
-                                </div>
-                                <div class="col-sm-9">
-                                    <h1 class="cs__title_site">Bibliothèque Numérique</h1>
-                                </div>
+                <div class="cs__search">
+                    <div class="cs__search-content">
+                        <img class="cs__search-logo" src="{{ asset('img/picto_CS.png') }}" alt="picto Collège Sévigné">
+                        <h1 class="cs__search-title">Bibliothèque Numérique</h1>
+
+                        <form class="cs__search-form" action=" path('search') }}" method="GET">
+                            <div class="cs__input-group">
+                                <input type="text" name="param" class="cs__input-control" aria-label="Rechercher" placeholder="Rechercher...">
+                                <button type="submit" class="cs__input-group-btn">
+                                    <i class="fas fa-search"></i>
+                                </button>
                             </div>
-                            <form action=" path('search') }}" method="GET">
-                                <div class="input-group">
-                                    <input type="text" name="param" class="form-control" aria-label="Rechercher" aria-describedby="basic-addon" placeholder="Rechercher...">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="input-group-text" id="basic-addon">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
 
-                    {% block app_img %}
-                        <img class="cs__front-blue" src="{{ asset('img/front_blue.jpg') }}" alt="accueil">
-                    {% endblock %}
+                    {#% block app_img %#}
+                        <!--<img class="cs__front-blue" src="{{ asset('img/front_blue.jpg') }}" alt="accueil">-->
+                    {#% endblock %#}
                 </div>
             {% endblock %}
 

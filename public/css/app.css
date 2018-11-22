@@ -17,6 +17,10 @@ body {
 a {
     color: inherit;
     text-decoration: none;
+    transition: color .3s;
+}
+a:hover {
+    color: #bfae94;
 }
 img {
     max-width: 100%;
@@ -25,12 +29,17 @@ img {
 
 /**--------- Header ---------**/
 .cs__header {
+    color: #fff;
     background: #e9e9e9;
+
+}
+.cs__header__topbar {
+    padding: .5rem 1rem;
     display: flex;
     flex-wrap: wrap;
-    padding: 1rem;
     align-items: center;
     justify-content: space-between;
+    font-size: .875rem;
 }
 .cs__header__logo {
     display: block;
@@ -39,7 +48,8 @@ img {
     background: transparent;
     border: 1px solid rgb(40, 88, 111);
     border-radius: .25em;
-    padding: .25em .5em
+    padding: .25em .5em;
+    cursor: pointer;
 }
 .cs__header__burger-icon {
     background: url('../img/burger.svg') no-repeat center center/cover;
@@ -53,29 +63,111 @@ img {
 .cs__header__burger.open ~ .cs__header__nav {
     display: block;
     width: 100%;
-    text-align: center;
+    text-align: right;
+    padding-top: 10px;
 }
 .cs__menu {
     list-style: none;
     padding: 0;
-    margin-bottom: 0;
+    margin: 0;
+}
+.cs__menu-item {
+    line-height: 1.7;
 }
 .cs__menu-link {
     color: #28586f;
 }
-.cs__menu-link::before {
-    content: '';
-    display: inline-block;
-    vertical-align: text-bottom;
-    height: 16px;
-    width: 2rem; 
+.cs__menu-link i {
+    margin-right: 10px;
 }
-.icon-login::before {
-    background: url('../img/sign-in.svg') top center no-repeat;
+.cs__search {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 7.5%, rgba(0,0,0,.35) 30%),
+    url('../img/front.jpg') top center/ cover;
 }
-.icon-logout::before {
-    background: url('../img/sign-out.svg') top center no-repeat;
+.cs__search-content {
+    padding: 7.5rem 1rem 9rem 1rem;
+    line-height: 1.2;
+    margin: 0 auto;
 }
-.icon-profil::before {
-    background: url('../img/id-card-solid.svg') top center no-repeat;
+.cs__search-logo {
+    display: none;
 }
+.cs__search-title {
+    font-weight: 400;
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    margin-top: 0;
+}
+.cs__input-group {
+    display: flex;
+}
+.cs__input-control {
+    display: block;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    height: 50px;
+    flex: 1 1 auto;
+}
+.cs__input-group>.cs__input-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.cs__input-group-btn {
+    margin-left: -1px;
+    font-size: 1.5rem;
+    padding: 0 .8rem;
+    color: #444;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    background-color: #ececec;
+}
+.cs__input-group-btn:hover {
+    color: #ececec;
+    background-color: #444;
+}
+.cs__input-group>.cs__input-group-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+@media screen and (min-width:485px) {
+    .cs__search-logo {
+        display: block;
+        float: left;
+        margin-right: 1rem;
+        height: 122px;
+    }
+    .cs__search-title {
+        font-size: 3.2rem;
+    }
+    .cs__search-form {
+        clear: both;
+    }
+}
+@media screen and (min-width:576px) {
+    .cs__header__topbar {
+        width: 86%
+    }
+    .cs__menu-item {
+        display: inline-block;
+    }    
+    .cs__search-content {
+        max-width: 600px;
+    }
+    .cs__search-logo {
+        margin-right: 1.5rem;
+        height: 144px;
+    }
+    .cs__search-title {
+        font-size: 3.8rem;
+    }
+}
+/*@media screen and (min-width:768px) {
+    .cs__search-content {
+        max-width: 66%;
+        padding: 12.5rem 1rem;
+    }
+ 
+}*/
