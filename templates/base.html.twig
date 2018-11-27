@@ -21,40 +21,40 @@
         <header class="cs__header">
             <div class="cs__header__topbar">
                 <a class="cs__header__logo" href="{{ path('home') }}">
-                    <img id="logo" src="{{ asset('/img/Logo.png') }}" alt="Logo Collège Sévigné">
+                    <img id="picto" src="{{ asset('/img/picto_CS.png') }}" alt="Logo Collège Sévigné">
+                    <img id="logo" src="{{ asset('/img/logo-blanc.png')}}" alt="Logo Collège Sévigné">
                 </a>
-    
-                <button class="cs__header__burger" type="button" aria-label="Navigation">
-                    <span class="cs__header__burger-icon"></span>
-                </button>
-    
-                <nav class="cs__header__nav">
-                    <ul class="cs__menu">
-                        {# if is_granted('ROLE_USER') #}
-                            {# if is_granted('ROLE_ADMIN') #}
-                                <li class="cs__menu-item">
-                                    <a class="cs__menu-link" href="{{ path('admin.home') }}"><i class="fas fa-tachometer-alt"></i>Tableau de bord</a>
-                                </li>
-                            {# endif #}
-                            <li class="cs__menu-item">
-                                <a class="cs__menu-link" href="#profile"><i class="fas fa-id-card"></i>Bienvenue  app.user.username|upper }}</a>
-                            </li>
-                            <li class="cs__menu-item">
-                                <a class="cs__menu-link" href="{{ path('security.logout') }}"><i class="fas fa-sign-out-alt"></i>Déconnexion</a>
-                            </li>
-                        {# else #}
-                            <li class="cs__menu-item">
-                                <a class="cs__menu-link" href="{{ path('security.login') }}"><i class="fas fa-sign-in-alt"></i>Connexion / Inscription</a>
-                            </li>
-                        {# endif #}
-                    </ul>
-                </nav>
+        
+                <div class="cs__header__menu">
+                    {% if is_granted('ROLE_USER') %}
+                        <div class="cs__menu__avatar">
+                            <button class="cs__toggle__sidebar" href="#">
+                                <img src="https://via.placeholder.com/50" alt="avatar">
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="cs__menu__btn">
+                            <a class="cs__btn" href="#">Inscription</a>
+                            <a class="cs__btn btn-primary" href="{{ path('security.login') }}">Connexion</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="cs__sidebar">
+                    <div class="cs__sidebar__menu">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('admin.home') }}">Tableau de bord</a>
+                        {% else %}
+                            <a href="#profile"><span class="cs__icon icon-user"></span>app.user.username|upper }}</a>
+                            <a class="cs__sidebar__logout" href="{{ path('security.logout') }}"><span class="cs__icon icon-close"></span>Déconnexion</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
 
             {% block search %}
                 <div class="cs__search">
                     <div class="cs__search-content">
-                        <img class="cs__search-logo" src="{{ asset('img/picto_CS.png') }}" alt="picto Collège Sévigné">
+                        <!--<img class="cs__search-logo" src="{{ asset('img/picto_CS.png') }}" alt="picto Collège Sévigné">-->
                         <h1 class="cs__search-title">Bibliothèque Numérique</h1>
 
                         <form class="cs__search-form" action=" path('search') }}" method="GET">
@@ -75,50 +75,37 @@
 
         </header>
 
-
-            <!--<div class="cs__header__midBar">
-                <nav class="cs__main__nav">
-                    <div class="container">
-                        <ul class="cs__menu container">
-                            <li class="cs__menu-midBar">
-                                <a class="cs__menu-link" href="{{ path('home') }}"><i class="fas fa-home"></i> Accueil</a>
-                            </li>
-                            <li class="cs__menu-midBar">
-                                <a class="cs__menu-link" href="http://www.collegesevigne.fr" target="_blank">Site Agrégation</a>
-                            </li>
-                            <li class="cs__menu-midBar">
-                                <a class="cs__menu-link" href="{{ path('book.catalog') }}">Catalogue complet</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+        <nav class="cs__midBar">
+            <div class="cs__submenu">
+                <a href="{{ path('home') }}"><i class="fas fa-home"></i> Accueil</a>
+                <a href="http://www.collegesevigne.fr" target="_blank">Site Agrégation</a>
+                <a href="{{ path('book.catalog') }}">Catalogue complet</a>
             </div>
-
+        </nav>
+<!--
         <div class="container">
             {% block body %}
             {% endblock %}
         </div>
-        -->
+-->
 
-        <!--<footer class="cs__footer">
-            <div class="container">
-                <div class="cs__footer__content">
-                    <div class="cs__footer__info col-md-7">
-                        <img class="cs__footer-logo" src="{{ asset('img/Logo-blanc.png') }}" alt="Logo Collège Sévigné">
-                        <h3>Bibliothèque Numérique</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                    <div class="cs__footer__links col-md-3">
-                        <ul class="cs__footer__links__list">
-                            <li><a href="{{ path('contact') }}">Contact</a></li>
-                            <li><a href="{{ path('legal') }}">Mentions légales</a></li>
-                            <li><a href="http://www.education.gouv.fr/" target="_blank">Education nationale</a></li>
-                        </ul>
-                    </div>
+        <footer class="cs__footer" style="margin-top:200px; background-color:#ccc">
+            <div class="cs__footer__content">
+                <div class="cs__footer__info">
+                    <img class="cs__footer-logo" src="{{ asset('img/logo.png') }}" alt="Logo Collège Sévigné">
+                    <h3>Bibliothèque Numérique</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="cs__footer__links">
+                    <ul class="cs__footer__links-list">
+                        <li><a href="{{ path('contact') }}">Contact</a></li>
+                        <li><a href="{{ path('legal') }}">Mentions légales</a></li>
+                        <li><a href="http://www.education.gouv.fr/" target="_blank">Education nationale</a></li>
+                    </ul>
                 </div>
             </div>
         </footer>
-
+<!--
         <div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
