@@ -7,7 +7,8 @@
         <meta name="author" content="Web-Shiny">
         <title>{% block title %}Bibliothèque de Sévigné{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">        
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <!--<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -54,7 +55,6 @@
             {% block search %}
                 <div class="cs__search">
                     <div class="cs__search-content">
-                        <!--<img class="cs__search-logo" src="{{ asset('img/picto_CS.png') }}" alt="picto Collège Sévigné">-->
                         <h1 class="cs__search-title">Bibliothèque Numérique</h1>
 
                         <form class="cs__search-form" action=" path('search') }}" method="GET">
@@ -66,33 +66,96 @@
                             </div>
                         </form>
                     </div>
-
-                    {#% block app_img %#}
-                        <!--<img class="cs__front-blue" src="{{ asset('img/front_blue.jpg') }}" alt="accueil">-->
-                    {#% endblock %#}
                 </div>
             {% endblock %}
 
         </header>
-
+<!--
         <nav class="cs__midBar">
             <div class="cs__submenu">
                 <a href="{{ path('home') }}"><i class="fas fa-home"></i> Accueil</a>
-                <a href="http://www.collegesevigne.fr" target="_blank">Site Agrégation</a>
-                <a href="{{ path('book.catalog') }}">Catalogue complet</a>
+                <a href="http://www.collegesevigne.fr" target="_blank">Agrégation</a>
+                <a href="{{ path('book.catalog') }}">Catalogue</a>
             </div>
         </nav>
+-->
+    <section class="cs__news">
+        <div class="cs__container">
+            <h2 class="cs__title">Nouveautés 2018</h2>
+
+            <div class="cs__list-courses">
+
+                <div class="cs__course">
+                    <div class="cs__course-img">
+                        <a href=""><img src="{{ asset('img/default.jpg') }}" alt="vignette defaut"></a>
+                    </div>
+                    <div class="cs__course-body">
+                        <h3 class="cs__course-title">Le monde romain</h3>
+                        <span class="cs__course-category">Histoire médiévale</span>
+                        <p class="cs__course-author">Auteur : <span>Sabine Lefèbvre</span></p>
+                    </div>
+
+                    <div class="cs__course-action">
+                        <a class="cs__more" href="#">Voir le cours</a>
+                    </div>
+                </div>
+                <div class="cs__course">
+                    <div class="cs__course-img">
+                        <a href=""><img src="{{ asset('img/default.jpg') }}" alt="vignette defaut"></a>
+                    </div>
+                    <div class="cs__course-body">
+                        <h3 class="cs__course-title">Le monde romain</h3>
+                        <span class="cs__course-category">Histoire médiévale</span>
+                        <p class="cs__course-author">Auteur : <span>Sabine Lefèbvre</span></p>
+                    </div>
+
+                    <div class="cs__course-action">
+                        <a class="cs__more" href="#">Voir le cours</a>
+                    </div>
+                </div>
+                <div class="cs__course">
+                    <div class="cs__course-img">
+                        <a href=""><img src="{{ asset('img/default.jpg') }}" alt="vignette defaut"></a>
+                    </div>
+                    <div class="cs__course-body">
+                        <h3 class="cs__course-title">Le monde romain</h3>
+                        <span class="cs__course-category">Histoire médiévale</span>
+                        <p class="cs__course-author">Auteur : <span>Sabine Lefèbvre</span></p>
+                    </div>
+
+                    <div class="cs__course-action">
+                        <a class="cs__more" href="#">Voir le cours</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cs__catalog">
+        <div class="cs__container">
+            <div class="cs__block-centered">
+                <h2 class="cs__title">Les collections Sévigné</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus pariatur nostrum repudiandae. Eum labore odio nulla tenetur, accusantium ea illo atque pariatur ipsa dolor quos inventore delectus ipsum ab consequatur.
+                </p>
+                <a class="cs__btn btn-primary" href="#">Voir le catalogue</a>
+            </div>
+        </div>
+    </section>
+
 <!--
         <div class="container">
-            {% block body %}
-            {% endblock %}
+            { block body }
+            { endblock }
         </div>
 -->
 
-        <footer class="cs__footer" style="margin-top:200px; background-color:#ccc">
-            <div class="cs__footer__content">
+        <footer class="cs__footer" style="margin-top:200px">
+            <div class="cs__container">
                 <div class="cs__footer__info">
-                    <img class="cs__footer-logo" src="{{ asset('img/logo.png') }}" alt="Logo Collège Sévigné">
+                    <div class="cs__footer-logo">
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo Collège Sévigné">
+                    </div>
                     <h3>Bibliothèque Numérique</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
