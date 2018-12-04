@@ -31,7 +31,7 @@
     <section class="cs__catalog">
         <div class="cs__container">
             <div class="cs__block-centered">
-                <h2 class="cs__title">Les collections Sévigné</h2>
+                <h1 class="cs__catalog-title">Les collections Sévigné</h1>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus pariatur nostrum repudiandae. Eum labore odio nulla tenetur, accusantium ea illo atque pariatur ipsa dolor quos inventore delectus ipsum ab consequatur.
                 </p>
@@ -39,4 +39,70 @@
             </div>
         </div>
     </section>
+
+    <section class="cs__offres">
+        <div class="cs__container">
+            <div class="cs__list__offres">
+                <div class="cs__offre">
+                    <img class="cs__offre-img" src="{{ asset('/img/sup.jpg') }}" alt="classe sup">
+                    <div class="cs__offre-content">
+                        <h3 class="cs__offre-title">Concours de l'enseignement</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus pariatur nostrum repudiandae. Eum labore odio nulla tenetur, accusantium ea illo atque pariatur ipsa dolor quos inventore delectus ipsum ab consequatur.
+                        </p>
+                        <a class="cs__offre-link" href="">Lire la suite<span class="cs__icon"></span></a>
+                    </div>
+                </div>
+                <div class="cs__offre">
+                    <img class="cs__offre-img" src="{{ asset('/img/certi.jpg') }}" alt="certification complémentaire">
+                    <div class="cs__offre-content">
+                        <h3 class="cs__offre-title">Certifications complémentaire</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus pariatur nostrum repudiandae. Eum labore odio nulla tenetur, accusantium ea illo atque pariatur ipsa dolor quos inventore delectus ipsum ab consequatur.
+                        </p>
+                        <a class="cs__offre-link" href="">Lire la suite<span class="cs__icon"></span></a>
+                    </div>
+                </div>
+                <div class="cs__offre">
+                    <img class="cs__offre-img" src="{{ asset('/img/louvre.jpg') }}" alt="façade école du Louvre">
+                    <div class="cs__offre-content">
+                        <h3 class="cs__offre-title">Préparation à l'Ecole du Louvre</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus pariatur nostrum repudiandae. Eum labore odio nulla tenetur, accusantium ea illo atque pariatur ipsa dolor quos inventore delectus ipsum ab consequatur.
+                        </p>
+                        <a class="cs__offre-link" href="">Lire la suite<span class="cs__icon"></span></a>
+                    </div>
+                </div>
+                <div class="cs__offre">
+                    <img class="cs__offre-img" src="{{ asset('/img/cinema.jpg') }}" alt="montage cinéma">
+                    <div class="cs__offre-content">
+                        <h3 class="cs__offre-title">Prépa Cinéma</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus pariatur nostrum repudiandae. Eum labore odio nulla tenetur, accusantium ea illo atque pariatur ipsa dolor quos inventore delectus ipsum ab consequatur.
+                        </p>
+                        <a class="cs__offre-link" href="">Lire la suite<span class="cs__icon"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cs__order">
+        <div class="cs__container">
+            <div class="cs__block-centered">
+                <h2 class="cs__title">Nos archives</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero aut vitae ullam quis rerum, quaerat accusamus, ea quidem sunt soluta expedita dolorem debitis eaque ipsam? Nobis eligendi amet labore veniam.</p>
+    
+                <form action="#" class="cs__order-form">
+                    <div class="cs__form-row">
+                        <input type="text" name="name" placeholder="Nom complet">
+                        <input type="email" name="email" placeholder="E-mail">
+                        <input type="text" name="cours" placeholder="Cours recherché">
+                    </div>
+                    <button class="cs__btn btn-primary">commander</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}
