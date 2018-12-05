@@ -20,6 +20,7 @@ a {
 }
 a:hover {
     color: #bfae94;
+    text-decoration: none;
 }
 img {
     max-width: 100%;
@@ -45,7 +46,7 @@ h2, h3 {
     align-items: center;
     justify-content: space-between;
     font-size: .875rem;
-    padding-bottom: 0;
+    /*padding-bottom: 0;*/
 }
 .cs__header__logo {
     display: block;
@@ -80,37 +81,29 @@ h2, h3 {
 .cs__sidebar {
     display: none;
     position: absolute;
-    top: 92px;
+    top: 98px;
     right: 0;
     width: 100%;
     font-size: .875rem;
 }
 .cs__sidebar__menu {
-    background-color: rgba(255, 255, 255, .4)
+    background-color: rgba(0,0,0, .6);
+    position: relative;
+    z-index: 5;
 }
 .cs__sidebar__menu a {
     display: block;
     line-height: 3.75;
     transition: .35s
 }
+.cs__sidebar__menu i,
+.cs__offre-content i {
+    margin: 0 .75rem;
+}
 .cs__sidebar__menu a:hover {
     background-color: #bfae94;
     color: #fff;
 }
-.cs__icon {
-    display: inline-block;
-    font: normal normal normal 14px/1 'FontAwesome';
-    font-size: inherit;
-    text-rendering: auto;
-    margin: 0 1rem;
-}
-.icon-user:before {
-    content: "\f007";
-}
-.icon-close:before {
-    content: "\f011 ";
-}
-
 /**------------------ Search ------------------**/
 .cs__search-content {
     padding: 7.5rem 1rem 13.625rem 1rem;
@@ -122,6 +115,7 @@ h2, h3 {
     font-size: 2.8rem;
     letter-spacing: 3px;
     margin-top: 0;
+    margin-bottom: .67em;
 }
 .cs__input-group {
     display: flex;
@@ -191,7 +185,6 @@ h2, h3 {
     flex-direction: column;
 }
 .cs__course-title {
-    margin: 0;
     font-size: 1.2rem;
 }
 .cs__course-category {
@@ -293,11 +286,14 @@ h2, h3 {
     display: inline-block;
     color: #bfae94;
 }
-.cs__offre-link span {
-    margin: 0 0 0 10px;
+.cs__offre-link:hover {
+    color: #558da4;
 }
-.cs__icon::after {
-    content: '\f0a9';
+.cs__offre-link i {
+    transition: transform .5s
+}
+.cs__offre-link:hover i {
+    transform: translate(10px);
 }
 
 /**------------------ Section order ------------------**/
@@ -324,8 +320,13 @@ h2, h3 {
     border-color: #bfae94;
     background-color: rgba(0, 0, 0, 0.1)
 }
+.cs__order-form {
+    margin-top: 30px;
+}
 .cs__order-form .cs__btn {
     color: #fff;
+    text-transform: uppercase;
+    margin-top: 30px;
 }
 .cs__order-form .cs__btn:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -336,10 +337,65 @@ h2, h3 {
     color: #fff;
     font-weight: 300;
 }
-.cs__footer__info {
+.cs__footer-info {
     padding: 1rem 0;
 }
+.cs__info-title {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+.cs__footer-links {
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+.cs__links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.cs__links-list a {
+    display: inline-block;
+    padding: .5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    transition: transform .5s, border-bottom-color .3s;
+}
+.cs__links-list a:hover {
+    transform: translate(30px);
+    border-bottom-color: transparent;
+}
 
+/**------------------ Login ------------------**/
+.cs__panel-login {
+    background-color: #fff;
+    box-shadow: 0 0 49px 14px rgba(188, 190, 194, 0.39);
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 4em 0;
+}
+.cs__panel-login h2 {
+    margin-bottom: 1rem;
+}
+.cs__panel-login input {
+    height: 45px;
+    border: 0;
+    font-size: 16px;
+    transition: all 0.1s linear;
+    box-shadow: none;
+    border-bottom: 1px solid #e7e7e7;
+    border-radius: 0;
+    padding: 6px 0;
+}
+.btn-login {
+    width: 100%;
+    margin-top: 30px;
+    font-weight: 300;
+    text-transform: uppercase;
+    transition: .4s;
+}
+.btn-login:hover {
+    background-color: #28586f;
+    color: #fff;
+}
 /**------------------ Media Query ------------------**/
 @media screen and (min-width:500px) {
     .cs__search-title, .cs__catalog-title {
@@ -423,9 +479,9 @@ h2, h3 {
         margin-bottom: 0;
     }
     .cs__course-more {
-        position: unset;
+        position: static;
         height: 40px;
-        opacity: unset;
+        opacity: 1;
         text-align: center;
         background-color: #f2f2f2;
         border-top: 1px solid rgba(0, 0, 0, .05);
@@ -482,6 +538,39 @@ h2, h3 {
     }
     .cs__offre:nth-child(3) {
         margin-bottom: 0;
+    }
+    .cs__form-row {
+        display: flex;
+        justify-content: space-between;
+    }
+    .cs__form-row input, 
+    .cs__order-form .cs__btn {
+        width: calc(33% - 15px);
+    }
+    .cs__footer {
+        overflow: hidden;
+    }
+    .cs__footer-info {
+        float: left;
+        width: 70%;
+    }
+    .cs__footer-links {
+        border-top: none;
+        text-align: right;
+    }
+    .cs__links-list a:hover {
+        transform: translate(-30px);
+    }
+    .cs__login {
+        min-height: 70vh;
+    }
+    .cs__panel-login {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .btn-login {
+        width: auto;
     }
 }
 @media screen and (min-width:900px) {

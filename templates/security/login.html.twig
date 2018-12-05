@@ -3,47 +3,28 @@
 {% block search %}{% endblock %}
 
 {% block body %}
-        <div class="sign row justify-content-md-center">
-            <div class="col-md-9 col-lg-6">
-                <div class="panel panel-login">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2>CONNEXION</h2>
-                                {% if error %}
-                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                                {% endif %}
-                                <form id="form_login" class="col-12" method="post" action="{{ path('security.login') }}">
-                                    <div class="form-group">
-                                        <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
-                                        <input type="text" value="{{ lastUsername }}" name="username" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword" class="sr-only">Mot de passe</label>
-                                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
-                                    </div>
-
-                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                                    <div class="pull-right">
-                                        <button type="submit" class="btn btn-login">Se connecter</button>
-                                    </div>
-                                </form>
-                            </div>
+        <section class="cs__login">
+            <div class="cs__container">
+                <div class="cs__panel-login">
+                    <h2>Connexion</h2>
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <form id="form_login" method="post" action="{{ path('security.login') }}">
+                        <div class="form-group">
+                            <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
+                            <input type="text" value="{{ lastUsername }}" name="username" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="sr-only">Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
                         </div>
 
-                    <div class="panel-heading">
-                        <div class="row">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                            <div class="col-md-6 tabs">
-                                <a href="{{ path('security.login') }}" {% block actif_login %}class="active" {% endblock %} id="login-form-link"><div class="login">CONNEXION</div></a>
-                            </div>
-                            <div class="col-md-6 tabs">
-                                <a href=" path('register') }}" {% block actif_register %}{% endblock %} id="register-form-link"><div class="register">INSCRIPTION</div></a>
-                            </div>
-
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-login">Se connecter</button>
+                    </form>
                 </div>
             </div>
-        </div>
+        </section>
 {% endblock %}
