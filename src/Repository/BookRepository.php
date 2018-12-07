@@ -46,6 +46,24 @@ class BookRepository extends ServiceEntityRepository
                     ->getQuery();
     }
 
+    /**
+     * @param $name
+     * @return array
+     */
+    public function findByAuthor($name): array
+    {
+        $author = explode(' ', $name);
+
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.authorLastname IN (:author)')
+            ->andWhere('b.authorFirstname IN (:author)')
+            ->setParameter('author', $author)
+            ->orderBy('b.yearBook', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     /*public function findAllOrderBy()
     {
         return $this->createQueryBuilder('b')
@@ -55,16 +73,6 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByAuthor($name)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.authorLastname IN (:name)')
-            ->andWhere('b.authorFirstname IN (:name)')
-            ->setParameter('name', $name)
-            ->orderBy('b.yearBook', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
 
     public function findByCategoryTitle($param)
     {

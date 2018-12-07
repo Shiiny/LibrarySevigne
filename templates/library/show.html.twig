@@ -5,81 +5,105 @@
 {% block body %}
     <section class="cs__single-course">
         <div class="cs__container">
+            <ul class="cs__breadcrumb">
+                <li><a href="{{ path('home') }}"><i class="fas fa-home"></i> Accueil</a> /</li>
+                <li><a href="{{ path('book.catalog') }}">Catalogue</a> /</li>
+                <li>{{ book.title }}</li>
+            </ul>
+
             <div class="jumbotron">
                 <img class="cs__img" src="http://placehold.it/700x300" alt="">
                 <div class="cs__course-info">
+                    <a class="cs__course-info-category" href=" path('catalog', {'category': book.category.title }) }}">{{ book.category.title }}</a>
                     <h3 class="cs__course-title">{{ book.title }}</h3>
-                    <a href=" path('catalog', {'category': book.category.title }) }}"><span class="cs__card__tag">{{ book.category.title }}</span></a>
-                    <p><strong>Auteur : {{ book.authorFirstname }} {{ book.authorLastname }}</strong></p>
-                    <p><i class="far fa-calendar-alt"></i> Année : {{ book.yearBook }}</p>
+                    <p class="cs__course-author">Auteur : <span>{{ book.author }}</span></p>
                     <p>Retrouvez tous les fichiers attachés à ce cours :</p>
-                    {# if is_granted('ROLE_USER') #}
-                    <div class="cs__card">
-                        <table class="table table-striped mb-0">
-                            <tr>
-                                <td>Nombres de fichiers</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>Prix</td>
-                                <td>125 €</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <a class="btn btn-outline-sevigne" href=" asset(book.pdffile.pathname) }}" target="_blank">Acheter</a>
-                    {# else #}
-                    <!--<div class="alert alert-info">Authentification obligatoire</div>-->
-                    {# endif #}
+                    <table class="table table-striped">
+                        <tr>
+                            <td><i class="far fa-calendar-alt"></i>Année</td>
+                            <td>{{ book.yearBook }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-file"></i>Fichiers</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td><i class="far fa-credit-card"></i>Prix</td>
+                            <td>125 €</td>
+                        </tr>
+                    </table>
+                    {% if is_granted('ROLE_USER') %}
+                        <a class="btn btn-outline-sevigne" href=" asset(book.pdffile.pathname) }}" target="_blank"><i class="fas fa-shopping-cart"></i>Acheter</a>
+                    {% else %}
+                        <div class="alert alert-info">Authentification obligatoire</div>
+                    {% endif %}
                 </div>
             </div>
 
-            <div class="cs__card">
-                <div class="cs__card__body">
-                    <h3>Description</h3>
-                    <p class="cs__card__content">{{ book.content|nl2br }}</p>
-                </div>
+            <div class="cs__course-description">
+                <h3 class="cs__course-title">Description</h3>
+                <p>{{ book.content|nl2br }}</p>
             </div>
 
             <!-- /row -->
 
             <!-- Related Projects Row -->
-            <h3 class="my-4">Du même auteur</h3>
-            <!--
-            <div id="carousel1">
-                {# for otherBook in otherBooks #}
-                    {# if otherBook.id != book.id #}
-                        <div class="cs__card item">
-                            <div class="cs__card__descriptionWarpper">
-                                <a class="cs__card__item" href="path('book.show', {id: otherBook.id, slug: book.slug}) }}">
-                                    <div class="cs__card__body">
-                                        <h5 class="cs__card__title"> otherBook.title|truncate(50)</h5>
-                                        <p class="cs__card__subtitle"><em>Auteur : otherBookauthorFirstname otherBookauthorLastname </em></p>
-                                        <p class="cs__card__content"> otherBook.content|truncate(200, true, " ...") }}</p>
+            {% if authorBooks|length > 1 %}
+                <h3 class="cs__course-title">Du même auteur</h3>
+                <div id="carousel1">
+                    <div class="cs__card item">
+                        {% for authorBook in authorBooks %}
+                            {% if authorBook.id != book.id %}
+                                <div class="cs__course">
+                                    <div class="cs__course-img">
+                                        <img src="{{ asset('img/default.jpg') }}" alt="vignette defaut">
                                     </div>
-                                </a>
-                            </div>
-                            <div class="cs__card__description">
-                                <figure class="cs__card__img">
-                                    <img src="asset('img/default.jpg') }}" alt="vignette defaut">
-                                    <span class="cs__card__categorie">otherBook.category.title </span>
-                                </figure>
-                                <div class="cs__card__body">
-                                    <h5 class="cs__card__title">otherBook.title|truncate(50) }}</h5>
-                                    <p class="cs__card__subtitle"><em>Auteur : therBook.authorFirstname }} otherBook.authorLastname }}</em></p>                                </div>
-                            </div>
-                            <div class="cs__card__action">
-                                <span>Voir le cours</span>
-                            </div>
-                        </div>
-                    {# endif #}
-                {# endfor #}
-            </div>-->
+                                    <div class="cs__course-body">
+                                        <h3 class="cs__course-title">{{ authorBook.title|truncate(50) }}</h3>
+                                        <span class="cs__course-category">{{ authorBook.category.title }}</span>
+                                        <p class="cs__course-author">Auteur : <span>{{ authorBook.author }}</span></p>
+                                    </div>
 
+                                    <div class="cs__course-more">
+                                        <a class="cs__course-link" href="{{ path('book.show', { id: authorBook.id, slug: authorBook.slug }) }}">
+                                            <span>Voir ce cours</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
             <!-- /row -->
         </div>
     </section>
+    <!--<div class="cs__card item">
+    <div class="cs__card__descriptionWarpper">
+        <a class="cs__card__item" href="path('book.show', {id: otherBook.id, slug: book.slug}) }}">
+            <div class="cs__card__body">
+                <h5 class="cs__card__title"> otherBook.title|truncate(50)</h5>
+                <p class="cs__card__subtitle"><em>Auteur : otherBookauthorFirstname otherBookauthorLastname </em></p>
+                <p class="cs__card__content"> otherBook.content|truncate(200, true, " ...") }}</p>
+            </div>
+        </a>
+    </div>
+    <div class="cs__card__description">
+        <figure class="cs__card__img">
+            <img src="asset('img/default.jpg') }}" alt="vignette defaut">
+            <span class="cs__card__categorie">otherBook.category.title </span>
+        </figure>
+        <div class="cs__card__body">
+            <h5 class="cs__card__title">otherBook.title|truncate(50) }}</h5>
+            <p class="cs__card__subtitle"><em>Auteur : therBook.authorFirstname }} otherBook.authorLastname }}</em></p>                                </div>
+    </div>
+    <div class="cs__card__action">
+        <span>Voir le cours</span>
+    </div>
+</div>-->
+
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{  asset('js/carousel.js') }}"></script>
 {% endblock %}

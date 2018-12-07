@@ -26,17 +26,21 @@ class UserFixture extends Fixture implements OrderedFixtureInterface
             [
                 'email' => 'shiny@gmail.com',
                 'password' => '123',
-                'username' => 'Shiny'
+                'username' => 'Shiny',
+                'role'  =>  ['ROLE_ADMIN']
             ],
             [
                 'email' => 'carine@sfr.fr',
                 'password' => '456',
-                'username' => 'Carine'
+                'username' => 'Carine',
+                'role'  =>  ['ROLE_USER']
+
             ],
             [
                 'email' => 'test@test.fr',
                 'password' => '789',
-                'username' => 'test'
+                'username' => 'test',
+                'role'  =>  ['ROLE_USER']
             ],
         ];
 
@@ -47,6 +51,7 @@ class UserFixture extends Fixture implements OrderedFixtureInterface
                 ->setEmail($list['email'])
                 ->setPassword($this->passwordEncoder->encodePassword($user, $list['password']))
                 ->setUsername($list['username'])
+                ->setRoles($list ['role'])
                 ->setIsActive(true)
             ;
             $manager->persist($user);

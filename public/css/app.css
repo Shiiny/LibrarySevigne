@@ -185,7 +185,7 @@ h2, h3 {
     flex-direction: column;
 }
 .cs__course-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 .cs__course-category {
     order: -1;
@@ -396,6 +396,55 @@ h2, h3 {
     background-color: #28586f;
     color: #fff;
 }
+
+/**------------------ Page Show ------------------**/
+.cs__breadcrumb {
+    padding: 0;
+    font-size: .8rem;
+    color: rgba(0, 0, 0, .4);
+}
+.cs__breadcrumb li {
+    display: inline-block;
+}
+.cs__breadcrumb a:hover {
+    text-decoration: underline;
+    color: #558da4;
+}
+.cs__course-info {
+    position: relative;
+    padding-top: 20px;
+    font-size: .9rem;
+}
+.cs__btn .btn-primary {
+    background-color: #a39870;
+}
+.cs__course-info-category {
+    display: block;
+    position: absolute;
+    top: -16px;
+    right: 0;
+    padding: .3rem .7rem;
+    background-color: rgba(255, 255, 255, .75);
+    color: #558da4;
+    border-radius: 14px;
+    text-transform: uppercase;
+    font-size: .75rem;
+    transition: .3s;
+}
+.cs__course-info-category:hover {
+    color: #fff;
+    background-color: rgba(40, 88, 111, .75);
+}
+.cs__course-info i {
+    margin-right: .75rem;
+}
+.table td:nth-child(2) {
+    text-align: right;
+}
+.cs__course-description {
+    padding: 2em 0;
+    text-align: justify;
+}
 /**------------------ Media Query ------------------**/
 @media screen and (min-width:500px) {
     .cs__search-title, .cs__catalog-title {
@@ -437,7 +486,7 @@ h2, h3 {
         margin: 0 auto;
         padding: 100px 0;
     }
-    .cs__list-courses {
+    .cs__list-courses, .cs__card.item {
         display: flex;
         flex-flow: row wrap;
         align-items: flex-start;
@@ -472,7 +521,7 @@ h2, h3 {
         top: -12px;
         padding: .3rem .5rem;
         background: #fff;
-        border: solid .5px;
+        border: solid 1px;
         border-radius: 12px;
     }
     .cs__course-author {
@@ -492,12 +541,11 @@ h2, h3 {
     }
     .cs__course-link span {
         position: relative;
-        top: 0%;
+        top: 0;
     }
     .cs__course:hover .cs__course-more {
         transform: scale(1.1);
         opacity: unset;
-        background-color: none;
     }
     .cs__course .cs__course-more:hover {
         transform: scale(1.1);
@@ -572,6 +620,15 @@ h2, h3 {
     .btn-login {
         width: auto;
     }
+    .cs__single-course .jumbotron {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .jumbotron .cs__img {
+        width: 65%;
+        margin-right: 30px;
+    }
 }
 @media screen and (min-width:900px) {
     .cs__course {
@@ -585,5 +642,8 @@ h2, h3 {
     }
     .cs__offre-title {
         font-size: 1.5rem;
+    }
+    .jumbotron .cs__img {
+        width: 70%;
     }
 }
