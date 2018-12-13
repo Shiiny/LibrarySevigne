@@ -445,6 +445,89 @@ h2, h3 {
     padding: 2em 0;
     text-align: justify;
 }
+.cs__other-course {
+    margin: 0 15px;
+}
+.cs__other-link {
+    display: flex;
+}
+/**------------------ Carousel ------------------**/
+#cs__slider{
+    position: relative;
+    flex-wrap: unset;
+}
+.cs__slider{
+    overflow: hidden;
+}
+.cs__slider__container {
+    transition: transform 0.9s;
+    transform: translate3d(0, 0, 0);
+}
+.cs__slider__container::after{
+    content: '';
+    clear: both;
+    display: table;
+}
+.cs__slider__item{
+    float: left;
+}
+.cs__slider__next, .cs__slider__prev{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: linear-gradient(-45deg, rgba(0, 0, 0, .15) 50%, #fff 0%), #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .16),
+    0 0 0 1px rgba(0, 0, 0, .08);
+    transition: background .3s, transform .3s, opacity .3s;
+}
+.cs__slider__next {
+    right: 0;
+}
+.cs__slider__next::after {
+    content: '';
+    display: block;
+    height: 50px;
+    background: url("../img/chevron_right.svg") center center/ 70% no-repeat;
+}
+.cs__slider__prev::after {
+    content: '';
+    display: block;
+    height: 50px;
+    background: url('../img/chevron_left.svg') center center/ 70% no-repeat;
+}
+.cs__slider__next:hover,
+.cs__slider__prev:hover {
+    transform: translateY(-45%) scale(1.1);
+}
+
+.cs__slider__prev-hidden, .cs__slider__next-hidden {
+    opacity: 0;
+}
+
+.cs__slider__pagination{
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.cs__slider__pagination_btn {
+    background-color: #fff;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 3px;
+    display: inline-block;
+    box-shadow: 0 2px 5px #3232321a;
+    transition: transform .3s;
+    cursor: pointer;
+}
+.cs__slider__pagination__btn-active, .cs__slider__pagination__btn:hover {
+    transform: scale(1.4);
+}
 /**------------------ Media Query ------------------**/
 @media screen and (min-width:500px) {
     .cs__search-title, .cs__catalog-title {
@@ -628,6 +711,21 @@ h2, h3 {
     .jumbotron .cs__img {
         width: 65%;
         margin-right: 30px;
+    }
+    .cs__other-course {
+        margin: 15px;
+        transition: transform .3s;
+        border-radius: 3px;
+        box-shadow: 0 1px 4px hsla(0, 0%, 73%, .5);
+    }
+    .cs__other-course:hover {
+        transform: translate3d(0,-15px,0);
+    }
+    .cs__other-link {
+        flex-direction: column;
+    }
+    .cs__other-link:hover {
+        color: inherit;
     }
 }
 @media screen and (min-width:900px) {

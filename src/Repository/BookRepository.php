@@ -50,14 +50,16 @@ class BookRepository extends ServiceEntityRepository
      * @param $name
      * @return array
      */
-    public function findByAuthor($name): array
+    public function findByAuthor($name, $id): array
     {
         $author = explode(' ', $name);
 
         return $this->createQueryBuilder('b')
             ->andWhere('b.authorLastname IN (:author)')
             ->andWhere('b.authorFirstname IN (:author)')
+            ->andWhere('b.id != :id')
             ->setParameter('author', $author)
+            ->setParameter('id', $id)
             ->orderBy('b.yearBook', 'DESC')
             ->getQuery()
             ->getResult();

@@ -62,7 +62,7 @@ class BookController extends AbstractController
                 'slug' => $book->getSlug()
             ], 301);
         }
-        $authorBooks = $this->bookRepository->findByAuthor($book->getAuthor());
+        $authorBooks = $this->bookRepository->findByAuthor($book->getAuthor(), $book->getId());
 
         return $this->render('library/show.html.twig', [
             'book' => $book,

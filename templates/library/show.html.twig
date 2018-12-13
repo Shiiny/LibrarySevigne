@@ -50,60 +50,27 @@
             <!-- Related Projects Row -->
             {% if authorBooks|length > 1 %}
                 <h3 class="cs__course-title">Du même auteur</h3>
-                <div id="carousel1">
-                    <div class="cs__card item">
-                        {% for authorBook in authorBooks %}
-                            {% if authorBook.id != book.id %}
-                                <div class="cs__course">
-                                    <div class="cs__course-img">
-                                        <img src="{{ asset('img/default.jpg') }}" alt="vignette defaut">
-                                    </div>
-                                    <div class="cs__course-body">
-                                        <h3 class="cs__course-title">{{ authorBook.title|truncate(50) }}</h3>
-                                        <span class="cs__course-category">{{ authorBook.category.title }}</span>
-                                        <p class="cs__course-author">Auteur : <span>{{ authorBook.author }}</span></p>
-                                    </div>
-
-                                    <div class="cs__course-more">
-                                        <a class="cs__course-link" href="{{ path('book.show', { id: authorBook.id, slug: authorBook.slug }) }}">
-                                            <span>Voir ce cours</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+                <div id="cs__slider">
+                    {% for authorBook in authorBooks %}
+                        <div class="cs__other-course">
+                            <a class="cs__other-link" href="{{ path('book.show', { id: authorBook.id, slug: authorBook.slug }) }}">
+                            <div class="cs__course-img">
+                                <img src="{{ asset('img/default.jpg') }}" alt="vignette defaut">
+                            </div>
+                            <div class="cs__course-body">
+                                <h3 class="cs__course-title">{{ authorBook.title|truncate(50) }}</h3>
+                                <p class="cs__course-author">Auteur : <span>{{ authorBook.author }}</span></p>
+                            </div>
+                            </a>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endif %}
             <!-- /row -->
         </div>
     </section>
-    <!--<div class="cs__card item">
-    <div class="cs__card__descriptionWarpper">
-        <a class="cs__card__item" href="path('book.show', {id: otherBook.id, slug: book.slug}) }}">
-            <div class="cs__card__body">
-                <h5 class="cs__card__title"> otherBook.title|truncate(50)</h5>
-                <p class="cs__card__subtitle"><em>Auteur : otherBookauthorFirstname otherBookauthorLastname </em></p>
-                <p class="cs__card__content"> otherBook.content|truncate(200, true, " ...") }}</p>
-            </div>
-        </a>
-    </div>
-    <div class="cs__card__description">
-        <figure class="cs__card__img">
-            <img src="asset('img/default.jpg') }}" alt="vignette defaut">
-            <span class="cs__card__categorie">otherBook.category.title </span>
-        </figure>
-        <div class="cs__card__body">
-            <h5 class="cs__card__title">otherBook.title|truncate(50) }}</h5>
-            <p class="cs__card__subtitle"><em>Auteur : therBook.authorFirstname }} otherBook.authorLastname }}</em></p>                                </div>
-    </div>
-    <div class="cs__card__action">
-        <span>Voir le cours</span>
-    </div>
-</div>-->
-
 {% endblock %}
 
-{% block scripts %}
-    <script src="{{  asset('js/carousel.js') }}"></script>
+{% block javascripts %}
+    <script src="{{ asset('js/carousel.js') }}"></script>
 {% endblock %}
