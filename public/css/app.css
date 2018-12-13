@@ -32,6 +32,10 @@ section {
 h2, h3 {
     color: #383838;
 }
+ul {
+    padding: 0;
+    list-style: none;
+}
 
 /**------------------ Header ------------------**/
 .cs__header {
@@ -364,7 +368,7 @@ h2, h3 {
     border-bottom-color: transparent;
 }
 
-/**------------------ Login ------------------**/
+/**------------------ Login Page ------------------**/
 .cs__panel-login {
     background-color: #fff;
     box-shadow: 0 0 49px 14px rgba(188, 190, 194, 0.39);
@@ -397,7 +401,7 @@ h2, h3 {
     color: #fff;
 }
 
-/**------------------ Page Show ------------------**/
+/**------------------ Show Page------------------**/
 .cs__breadcrumb {
     padding: 0;
     font-size: .8rem;
@@ -451,7 +455,7 @@ h2, h3 {
 .cs__other-link {
     display: flex;
 }
-/**------------------ Carousel ------------------**/
+/**------------------ Slider ------------------**/
 #cs__slider{
     position: relative;
     flex-wrap: unset;
@@ -528,6 +532,68 @@ h2, h3 {
 .cs__slider__pagination__btn-active, .cs__slider__pagination__btn:hover {
     transform: scale(1.4);
 }
+
+/**------------------ Catalog Page ------------------**/
+.cs__catalog-sidebar {
+    background: #fff;
+    padding: 1em;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+.cs__catalog-sidebar-title {
+    margin-bottom: 22px;
+    font-size: 1.5rem;
+}
+.cs__accordion-title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid #d6d6d6;
+    color: #444;
+    padding-bottom: 5px;
+    margin-bottom: 13px;
+}
+.cs__accordion-title i {
+    float: right;
+    transition: transform .3s;
+}
+.cs__accordion-search-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 13px;
+    position: relative;
+}
+.cs__accordion-search-icon {
+    position: absolute;
+    right: 15px;
+}
+.cs__accordion-item.__hidden {
+    display: none;
+}
+.cs__accordion-item.__search-active {
+    background-color: #e6ded1;
+    padding: .5em;
+}
+.cs__accordion-badge {
+    float: right;
+    color: #558da4;
+}
+.cs__accordion-control {
+    text-align: center;
+    padding: 4px 0;
+    line-height: 30px;
+}
+.cs__control-voir {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #8d8d8d;
+}
+.cs__control-voir:hover {
+    color: #558da4;
+    font-weight: 400;
+    transform: scale(1.1);
+}
+
 /**------------------ Media Query ------------------**/
 @media screen and (min-width:500px) {
     .cs__search-title, .cs__catalog-title {

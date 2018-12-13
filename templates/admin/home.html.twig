@@ -11,8 +11,8 @@
                         <div class="cs__card__admin">
                             <div class="card-body">
                                 <div class="cs__text">
-                                    <strong>{{ book.category.title }}</strong>
-                                    <strong class="pull-right">{{ book.yearBook }}</strong>
+                                    <span>{{ book.category.title }}</span>
+                                    <span class="pull-right">{{ book.yearBook }}</span>
                                 </div>
                                 <h3 class="mb-0">
                                     <a class="text-dark" href="{{ path('admin.book.edit', {id: book.id}) }}">{{ book.title }}</a>

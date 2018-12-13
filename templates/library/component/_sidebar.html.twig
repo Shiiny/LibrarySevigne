@@ -1,0 +1,55 @@
+<aside class="cs__catalog-sidebar">
+    <h3 class="cs__catalog-sidebar-title">Sélectionnez une rubrique</h3>
+    <div class="cs__catalog-sidebar-content">
+        <!-- item Catégorie -->
+        <div id="js_categorie">
+            <a href="#cs__categories" data-toggle="collapse" title="Filtre catégories" class="accordion-toggle" aria-selected="true" aria-expanded="true" aria-controls="collapse01">
+                <h4 class="cs__accordion-title">Catégories <i class="fas fa-chevron-up"></i></h4>
+            </a>
+            <div id="cs__categories" class="collapse show" aria-hidden="false" tabindex="0">
+                <div class="cs__accordion-search-field">
+                    <span class="cs__accordion-search-icon"><i class="fas fa-search"></i></span>
+                    <input type="text" class="form-control cs__accordion-search-term" placeholder="Filtrer">
+                </div>
+                <ul id="categories" class="cs__accordion-list">
+                    {# block sidebar_categories #}
+                    {%  for key, category in filters.categories %}
+                        <li class="cs__accordion-item {% if key > 4 %}__hidden {% endif %}">
+                            <a href=" path('catalog', {category: category }) }}" title="">{{ category }} <strong class="cs__accordion-badge">1</strong></a>
+                        </li>
+                    {% endfor %}
+                    {# endblock #}
+                </ul>
+                {% if filters.categories > 4 %}
+                    <div class="cs__accordion-control">
+                        <button class="cs__control-voir see-more">Voir plus <span>({{ filters.categories|length - 5 }})</span> +</button>
+                        <button class="cs__control-voir see-less" style="display: none">Voir moins -</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <!-- item Auteur -->
+        <div id="js_author">
+            <a href="#cs__authors" data-toggle="collapse" title="Filtre auteurs" class="accordion-toggle" aria-selected="true" aria-expanded="true" aria-controls="collapse02">
+                <h4 class="cs__accordion-title">AUTEURS <i class="fas fa-chevron-up"></i></h4>
+            </a>
+            <div id="cs__authors" class="collapse show" aria-hidden="false">
+                <ul id="authors" class="cs__accordion-list">
+                    {# block sidebar_profs #}
+                    {%  for key, author in filters.authors %}
+                        <li class="cs__accordion-item {% if key > 4 %}__hidden {% endif %}">
+                            <a href=" path('catalog', {author: author }) }}" title="">{{ author }}</a>
+                        </li>
+                    {%  endfor %}
+                    {# endblock #}
+                </ul>
+                {% if filters.authors > 4 %}
+                    <div class="cs__accordion-control">
+                        <button class="cs__control-voir see-more">Voir plus <span>({{ filters.authors|length - 5 }}) +</span></button>
+                        <button class="cs__control-voir see-less" style="display: none">Voir moins -</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</aside>
