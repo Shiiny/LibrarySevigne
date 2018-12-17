@@ -34,6 +34,7 @@ h2, h3 {
 }
 ul {
     padding: 0;
+    margin: 0;
     list-style: none;
 }
 
@@ -182,7 +183,8 @@ ul {
     flex: none;
     line-height: 0;
 }
-.cs__course-body {
+.cs__course-body, .cs__item-body {
+    position: relative;
     width: 100%;
     margin-left: 1rem;
     display: flex;
@@ -191,13 +193,13 @@ ul {
 .cs__course-title {
     font-size: 1.5rem;
 }
-.cs__course-category {
+.cs__course-category, .cs__item-category {
     order: -1;
     font-size: .63rem;
     text-transform: uppercase;
     color: #558da4;
 }
-.cs__course-author {
+.cs__course-author, .cs__item-author {
     font-size: .8rem;
 }
 .cs__course-author span {
@@ -277,7 +279,7 @@ ul {
     padding: 0 15px;
     background-color: #fff;
 }
-.cs__offre-title {
+.cs__offre-title, .cs__item-title {
     line-height: 1;
     margin: 0;
     padding-bottom: .75rem;
@@ -404,6 +406,7 @@ ul {
 /**------------------ Show Page------------------**/
 .cs__breadcrumb {
     padding: 0;
+    margin-bottom: 1rem;
     font-size: .8rem;
     color: rgba(0, 0, 0, .4);
 }
@@ -572,9 +575,29 @@ ul {
     background-color: #e6ded1;
     padding: .5em;
 }
+.cs__accordion-item a {
+    position: relative;
+    display: block;
+    width: 100%;
+}
 .cs__accordion-badge {
-    float: right;
-    color: #558da4;
+    font-size: .7rem;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    height: 20px;
+    width: 20px;
+    padding: 2px;
+    color: #383838;
+    background-color: #bfae94;
+    border-radius: .15rem;
+    opacity: .4;
+    transition: opacity .3s;
+}
+.cs__accordion-item a:hover .cs__accordion-badge {
+    opacity: 1;
 }
 .cs__accordion-control {
     text-align: center;
@@ -592,6 +615,37 @@ ul {
     color: #558da4;
     font-weight: 400;
     transform: scale(1.1);
+}
+.cs__content-result {
+    margin: 2rem 0;
+}
+.page-item.active .page-link {
+    border-color: #bfae94;
+    background-color: #bfae94;
+}
+.page-link {
+    color: #558da4;
+}
+.cs__course-item {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 15px;
+}
+.cs__pagination {
+    margin-top: 2rem;
+}
+.cs__item-title {
+    padding-top: .5rem;
+}
+.cs__item-date {
+    font-size: .75rem;
+    color: #cccccc;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.cs__item-author {
+    margin-bottom: 0;
 }
 
 /**------------------ Media Query ------------------**/
@@ -635,7 +689,7 @@ ul {
         margin: 0 auto;
         padding: 100px 0;
     }
-    .cs__list-courses, .cs__card.item {
+    .cs__list-courses {
         display: flex;
         flex-flow: row wrap;
         align-items: flex-start;
@@ -660,7 +714,6 @@ ul {
         margin: 0;
         display: block;
         flex-direction: unset;
-        position: relative;
         padding: 1rem;
         min-height: 120px;
     }
@@ -793,6 +846,20 @@ ul {
     .cs__other-link:hover {
         color: inherit;
     }
+    .cs__main {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .cs__catalog-sidebar {
+        width: 40%;
+    }
+    .cs__catalog-content {
+        width: calc(60% - 30px);
+    }
+    .cs__content-result {
+        margin-top: 0;
+    }
 }
 @media screen and (min-width:900px) {
     .cs__course {
@@ -809,5 +876,11 @@ ul {
     }
     .jumbotron .cs__img {
         width: 70%;
+    }
+    .cs__catalog-sidebar {
+        width: 30%;
+    }
+    .cs__catalog-content {
+        width: calc(70% - 30px);
     }
 }

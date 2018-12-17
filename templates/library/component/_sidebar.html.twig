@@ -15,7 +15,7 @@
                     {# block sidebar_categories #}
                     {%  for key, category in filters.categories %}
                         <li class="cs__accordion-item {% if key > 4 %}__hidden {% endif %}">
-                            <a href=" path('catalog', {category: category }) }}" title="">{{ category }} <strong class="cs__accordion-badge">1</strong></a>
+                            <a href=" path('catalog', {category: category }) }}" title="">{{ category }} <span class="cs__accordion-badge">1</span></a>
                         </li>
                     {% endfor %}
                     {# endblock #}
@@ -38,7 +38,7 @@
                     {# block sidebar_profs #}
                     {%  for key, author in filters.authors %}
                         <li class="cs__accordion-item {% if key > 4 %}__hidden {% endif %}">
-                            <a href=" path('catalog', {author: author }) }}" title="">{{ author }}</a>
+                            <a href=" path('catalog', {author: author }) }}" title="">{{ author }}<span class="cs__accordion-badge">1</span></a>
                         </li>
                     {%  endfor %}
                     {# endblock #}

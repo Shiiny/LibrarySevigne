@@ -3,49 +3,37 @@
 {% block body %}
     <section>
         <div class="cs__container">
-            <!-- Sidebar -->
-            {{ include ('library/component/_sidebar.html.twig', {}) }}
+            <div class="cs__main">
+                {{ include ('library/component/_sidebar.html.twig', {}) }}
 
-            <!-- /Sidebar -->
-
-            <div class="cs__catalog-content">
-                {% if books is not empty %}
-                    {% block main_title %}{% endblock %}
-                    <div class="cs__resultBar">
-                        <p>Tous les cours : {{ books.getTotalItemCount }}</p>
-                        <div class="cs__pagination">
-                            <nav aria-label="Pagination">
+                <div class="cs__catalog-content">
+                    {% if books is not empty %}
+                        {% block main_title %}{% endblock %}
+                        <div class="cs__content-result">
+                            <p>Tous les cours : {{ books.getTotalItemCount }}</p>
+                            <div class="cs__pagination" aria-label="Pagination">
                                 {{ knp_pagination_render(books) }}
-                            </nav>
-                        </div>
-                    </div>
-                    {% for book in books %}
-                        <div class="cs__card">
-                            <div class="cs__card__container">
-                                <figure class="cs__card__thumbnail col-sm-4">
-                                    <img src="http://placehold.it/350x150" class="cs__img" alt="">
-                                </figure>
-                                <div class="cs__card__book col-sm-8">
-                                    <h3 class="cs__card__title"><a href="{{ path('book.show', {id: book.id, slug: book.slug}) }}">{{ book.title }}</a></h3>
-                                    <span class="cs__card__tag">{{ book.category.title }}</span>
-                                    <div class="cs__card__subinfo">
-                                        <p class="col-8 info-text">Auteur : {{ book.authorFirstname }} {{ book.authorLastname }}</p>
-                                        <p class="col-4 info-text date">Année : {{ book.yearBook }}</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    {% endfor %}
-                    <div class="cs__pagination">
-                        <nav aria-label="Pagination">
+                        {% for book in books %}
+                            <div class="cs__course-item">
+                                <img class="cs__item-img" src="http://placehold.it/100x100" alt="thumb">
+                                <div class="cs__item-body">
+                                    <span class="cs__item-date">Année : {{ book.yearBook }}</span>
+                                    <h3 class="cs__item-title"><a href="{{ path('book.show', {id: book.id, slug: book.slug}) }}">{{ book.title }}</a></h3>
+                                    <span class="cs__item-category">{{ book.category.title }}</span>
+                                    <p class="cs__item-author">Auteur : {{ book.author }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="cs__pagination" aria-label="Pagination">
                             {{ knp_pagination_render(books) }}
-                        </nav>
-                    </div>
-                {% else %}
-                    <p>Aucun résultat</p>
-                {% endif %}
+                        </div>
+                    {% else %}
+                        <p>Aucun résultat</p>
+                    {% endif %}
+                </div>
             </div>
-
         </div>
     </section>
 {% endblock %}
