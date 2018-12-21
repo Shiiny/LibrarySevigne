@@ -13,19 +13,17 @@
                 </div>
                 <ul id="categories" class="cs__accordion-list">
                     {# block sidebar_categories #}
-                    {%  for key, category in filters.categories %}
-                        <li class="cs__accordion-item {% if key > 4 %}__hidden {% endif %}">
-                            <a href=" path('catalog', {category: category }) }}" title="">{{ category }} <span class="cs__accordion-badge">1</span></a>
+                    {%  for key, value, category in filters.categories %}
+                        <li class="cs__accordion-item">
+                            <a href=" path('catalog', {category: category }) }}" title="">{{ key }} <span class="cs__accordion-badge">{{ value }}</span></a>
                         </li>
                     {% endfor %}
                     {# endblock #}
                 </ul>
-                {% if filters.categories > 4 %}
-                    <div class="cs__accordion-control">
-                        <button class="cs__control-voir see-more">Voir plus <span>({{ filters.categories|length - 5 }})</span> +</button>
-                        <button class="cs__control-voir see-less" style="display: none">Voir moins -</button>
-                    </div>
-                {% endif %}
+                <div class="cs__accordion-control">
+                    <button class="cs__control-voir see-more">Voir plus <span class="js-count"></span> +</button>
+                    <button class="cs__control-voir see-less" style="display: none">Voir moins -</button>
+                </div>
             </div>
         </div>
         <!-- item Auteur -->
@@ -36,19 +34,17 @@
             <div id="cs__authors" class="collapse show" aria-hidden="false">
                 <ul id="authors" class="cs__accordion-list">
                     {# block sidebar_profs #}
-                    {%  for key, author in filters.authors %}
-                        <li class="cs__accordion-item {% if key > 4 %}__hidden {% endif %}">
-                            <a href=" path('catalog', {author: author }) }}" title="">{{ author }}<span class="cs__accordion-badge">1</span></a>
+                    {%  for key, value, author in filters.authors %}
+                        <li class="cs__accordion-item">
+                            <a href=" path('catalog', {author: author }) }}" title="">{{ key }}<span class="cs__accordion-badge">{{ value }}</span></a>
                         </li>
                     {%  endfor %}
                     {# endblock #}
                 </ul>
-                {% if filters.authors > 4 %}
-                    <div class="cs__accordion-control">
-                        <button class="cs__control-voir see-more">Voir plus <span>({{ filters.authors|length - 5 }}) +</span></button>
-                        <button class="cs__control-voir see-less" style="display: none">Voir moins -</button>
-                    </div>
-                {% endif %}
+                <div class="cs__accordion-control">
+                    <button class="cs__control-voir see-more">Voir plus <span class="js-count"></span> +</span></button>
+                    <button class="cs__control-voir see-less" style="display: none">Voir moins -</button>
+                </div>
             </div>
         </div>
     </div>

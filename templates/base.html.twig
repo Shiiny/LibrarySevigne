@@ -54,15 +54,7 @@
                 <div class="cs__search">
                     <div class="cs__search-content">
                         <h1 class="cs__search-title">Bibliothèque Numérique</h1>
-
-                        <form class="cs__search-form" action=" path('search') }}" method="GET">
-                            <div class="cs__input-group">
-                                <input type="text" name="param" class="cs__input-control" aria-label="Rechercher" placeholder="Rechercher...">
-                                <button type="submit" class="cs__input-group-btn">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
+                        {{ render(controller('App\\Controller\\LibraryController::search')) }}
                     </div>
                 </div>
             {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\BookSearch;
 use App\Filters\Filter;
 use App\Repository\BookRepository;
 use App\Repository\CategoryRepository;
@@ -18,36 +19,45 @@ class BookController extends AbstractController
      * @var BookRepository
      */
     private $bookRepository;
+    /**
+     * @var CategoryRepository
+     */
+    private $categoryRepository;
 
-    public function __construct(BookRepository $bookRepository)
+    public function __construct(BookRepository $bookRepository, CategoryRepository $categoryRepository)
     {
         $this->bookRepository = $bookRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
      * @Route("/catalog", name="book.catalog")
      * @param PaginatorInterface $paginator
      * @param Request $request
+     * @param Filter $filter
      * @return Response
      */
-    public function catalog(PaginatorInterface $paginator, Request $request, Filter $filter): Response
+    public function catalog(PaginatorInterface $paginator, Request $request, Filter $filter, CategoryRepository $categoryRepository): Response
     {
         $books = $paginator->paginate(
             $this->bookRepository->findAllBooksQuery(),
             $request->query->getInt('page', 1),
             10
         );
-        $filters = $filter->filterAuthorAndCategoryForSidebar();
-        //$categories = $categoryRepository->findAll();
-
+        $filters = $filter->filterAuthorAndCategory($this->bookRepository->findAll());
         dump($filters);
+        /*foreach ($filters['categories'] as $key => $category) {
+            //dump($key, $category);
+            $countCat = $this->bookRepository->findBy(['category' => $key]);
+            dump(count($countCat));
+        }*/
         //die();
         return $this->render('library/catalog.html.twig', [
             'books' => $books,
             'filters' => $filters,
-          //  'categories' => $categories
         ]);
     }
+
     /**
      * @Route("/book/{slug}-{id}", name="book.show", requirements={"slug": "[a-z0-9\-]*", "id": "\d+"})
      * @param Book $book
@@ -67,6 +77,34 @@ class BookController extends AbstractController
         return $this->render('library/show.html.twig', [
             'book' => $book,
             'authorBooks' => $authorBooks
+        ]);
+    }
+
+    /**
+     * @Route("/catalog/book", name="book.search")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    public function search(PaginatorInterface $paginator, Request $request, Filter $filter): Response
+    {
+        $search = new BookSearch();
+        if ($request->get('search') === '') {
+            return $this->redirectToRoute('book.catalog', [],301);
+        }
+        $search->setSearch($request->get('search'));
+
+        $books = $paginator->paginate(
+            $this->bookRepository->findAllBooksQuery($search),
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        $filters = $filter->filterAuthorAndCategory($books);
+
+        return $this->render('library/catalog.html.twig', [
+            'books' => $books,
+            'filters' => $filters,
         ]);
     }
 }

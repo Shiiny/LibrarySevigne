@@ -1,0 +1,6 @@
+{{ form_start(form, {'action': path('book.search') }) }}
+    <div class="cs__input-group">
+        {{ form_widget(form.search, {'attr': {'class': 'cs__input-control'} } ) }}
+        <button type="submit" class="cs__input-group-btn"><i class="fas fa-search"></i></button>
+    </div>
+{{ form_end(form) }}

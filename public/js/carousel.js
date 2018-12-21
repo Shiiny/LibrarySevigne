@@ -237,14 +237,12 @@ class Carousel {
 
     onWindowResize() {
         let resize = 0
-        console.log(this.options.navigation)
         this.options.responsive.forEach((setting) => {
             if (window.innerWidth < setting.breakpoint) {
                 resize = setting.breakpoint
                 this.options.responsive.slidesVisible = setting.slidesVisible
             }
         })
-        console.log(resize)
         if (resize !== this.responsive) {
             this.responsive = resize
             this.setStyle()

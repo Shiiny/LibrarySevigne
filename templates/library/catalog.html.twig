@@ -3,14 +3,20 @@
 {% block body %}
     <section>
         <div class="cs__container">
+            <ul class="cs__breadcrumb">
+                <li><a href="{{ path('home') }}"><i class="fas fa-home"></i> Accueil</a></li>
+            </ul>
             <div class="cs__main">
+
                 {{ include ('library/component/_sidebar.html.twig', {}) }}
 
                 <div class="cs__catalog-content">
                     {% if books is not empty %}
-                        {% block main_title %}{% endblock %}
+                        {% if app.request.attributes.get("_route") == "book.search" %}
+                            <h2>Recherche : "{{ app.request.get('search') }}"</h2>
+                        {% endif %}
                         <div class="cs__content-result">
-                            <p>Tous les cours : {{ books.getTotalItemCount }}</p>
+                            <p>Cours trouvés : {{ books.getTotalItemCount }}</p>
                             <div class="cs__pagination" aria-label="Pagination">
                                 {{ knp_pagination_render(books) }}
                             </div>
@@ -30,6 +36,7 @@
                             {{ knp_pagination_render(books) }}
                         </div>
                     {% else %}
+                        <h3>Recherche : "{{ app.request.get('search') }}"</h3>
                         <p>Aucun résultat</p>
                     {% endif %}
                 </div>

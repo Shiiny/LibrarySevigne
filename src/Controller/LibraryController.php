@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\BookSearch;
+use App\Form\BookSearchType;
 use App\Form\ContactType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +23,18 @@ class LibraryController extends AbstractController
         $books = $repository->findByLimitAndDate(12, 'yearBook');
 
         return $this->render('library/home.html.twig', compact('books'));
+    }
+
+    /**
+     * @return Response
+     */
+    public function search(): Response
+    {
+        $search = new BookSearch();
+
+        $form = $this->createForm(BookSearchType::class, $search);
+
+        return $this->render('library/component/_searchForm.html.twig', ["form" => $form->createView()]);
     }
 
     /**

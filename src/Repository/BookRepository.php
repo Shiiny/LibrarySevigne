@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\BookSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -37,13 +38,33 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param BookSearch|null $search
      * @return Query
      */
-    public function findAllBooksQuery(): Query
+    public function findAllBooksQuery(BookSearch $search = null): Query
     {
-        return $this->createQueryBuilder('b')
-                    ->orderBy('b.title', 'ASC')
-                    ->getQuery();
+        //$terms = explode(' ', $search->getSearch());
+
+        $sql = 'b.title LIKE :search 
+                OR c.title LIKE :search 
+                OR b.authorFirstname LIKE :search 
+                OR b.authorLastname LIKE :search 
+                OR b.yearBook LIKE :search';
+
+        $query = $this->getBookWithCategories();
+        if (!is_null($search)) {
+            $query->where($sql)
+                ->setParameter('search', '%'.$search->getSearch().'%');
+        }
+
+        /*if (count($terms) > 1) {
+                $query->andWhere($sql)->setParameter('search', '%'.$terms[1].'%');
+            $query->andWhere($sql)->setParameter('search', '%'.$terms[2].'%');
+
+
+        }*/
+        $query->orderBy('b.title', 'ASC');
+        return $query->getQuery();
     }
 
     /**
@@ -65,7 +86,12 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
+    private function getBookWithCategories()
+    {
+        $query = $this->createQueryBuilder('b')
+            ->leftJoin('b.category','c');
+        return $query;
+    }
     /*public function findAllOrderBy()
     {
         return $this->createQueryBuilder('b')
@@ -131,11 +157,5 @@ class BookRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
-    private function withCategories()
-    {
-        $query = $this->createQueryBuilder('b')
-            ->leftJoin('b.category','c');
-
-        return $query;
-    }*/
+*/
 }

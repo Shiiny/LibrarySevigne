@@ -26,30 +26,37 @@ class Filter
 
     /**
      *
+     * @param null $element
      * @return array
      */
-    public function filterAuthorAndCategoryForSidebar()
+    public function filterAuthorAndCategory($element)
     {
-        $books = $this->bookRepository->findAll();
+        $value = 1;
 
         $arrayAuthors['authors'] = [];
         $arrayCategory['categories'] = [];
 
-        foreach ($books as $book)
+        foreach ($element as $elt)
         {
-            $nameAuthor = $book->getAuthor();
-            $titleCategory = $book->getCategory()->getTitle();
-
-            if (!in_array($nameAuthor, $arrayAuthors['authors']))
+            if (array_key_exists($elt->getAuthor(), $arrayAuthors['authors']))
             {
-                array_push($arrayAuthors['authors'], $nameAuthor);
+                $arrayAuthors['authors'][$elt->getAuthor()] = $arrayAuthors['authors'][$elt->getAuthor()] + 1;
             }
-            if (!in_array($titleCategory, $arrayCategory['categories']))
+            else {
+                $arrayAuthors['authors'] += [$elt->getAuthor() => $value];
+            }
+
+
+            if (array_key_exists($elt->getCategory()->getTitle(), $arrayCategory['categories']))
             {
-                array_push($arrayCategory['categories'], $titleCategory);
+                $arrayCategory['categories'][$elt->getCategory()->getTitle()] = $arrayCategory['categories'][$elt->getCategory()->getTitle()] + 1;
+            }
+            else {
+                $arrayCategory['categories'] += [$elt->getCategory()->getTitle() => $value];
             }
         }
         $arrayFilter = array_merge($arrayAuthors, $arrayCategory);
+
 
         return $arrayFilter;
     }
