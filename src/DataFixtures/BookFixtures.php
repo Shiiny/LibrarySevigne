@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Book;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
 class BookFixtures extends Fixture
